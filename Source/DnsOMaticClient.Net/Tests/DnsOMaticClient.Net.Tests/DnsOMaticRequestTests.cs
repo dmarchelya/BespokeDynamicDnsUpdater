@@ -13,6 +13,7 @@ namespace DnsOMaticClient.Net.Tests
 		private string dnsOMaticUsername = "dnsomaticclient";
 		private string dnsOMaticPassword = "XBychON2";
 		private string hostnameToUpdate = "dnsomaticclient.no-ip.info";
+		private string hostnameToUpdate2 = "dnsomaticclient2.no-ip.info";
 
 		[Test]
 		[Ignore("Manual Test")]
@@ -35,5 +36,17 @@ namespace DnsOMaticClient.Net.Tests
 
 			//TODO: verify response code
 		}
+
+		[Test]
+		[Ignore("Manual Test")]
+		public void CanUpdateMultipleHostnames()
+		{
+			var request = new DnsOMaticRequest(dnsOMaticUsername, dnsOMaticPassword);
+
+			request.Update(new List<string>() {hostnameToUpdate, hostnameToUpdate2});
+
+			//TODO: verify response code
+		}
+
 	}
 }

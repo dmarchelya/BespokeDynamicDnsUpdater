@@ -34,10 +34,45 @@ namespace DnsOMaticClient.Net
 		/// The DNS-O-Matic Password
 		/// </summary>
 		public string Password { get; set; }
+		
+		/// <summary>
+		/// Updates the specified hostnames via DNS-O-Matic with the public facing
+		/// IP Address for the system that the request is made from.
+		/// </summary>
+		/// <param name="hostnames">The hostnames to update.</param>
+		public void Update(List<string> hostnames)
+		{
+			var resolver = new IpAddressResolver();
+
+			var ip = resolver.GetPublicIpAddress();
+
+			if (ip == null) return;
+
+			logger.Info(string.Format("Resolved public IP Address as {0}", ip));
+
+			foreach(var hostname in hostnames)
+			{
+				Update(hostname, ip);
+			}
+		}
 
 		/// <summary>
-		/// Updates the specified hostname via DNS-O-Matic with public facing IP
-		/// address for the system that the request is made from.
+		/// Updates the specified hostnames via DNS-O-Matic with the IP Address
+		/// that is specified.
+		/// </summary>
+		/// <param name="hostnames">The hostnames to update.</param>
+		/// <param name="ipAddress">The IP Address to update to.</param>
+		public void Update(List<string> hostnames, string ipAddress)
+		{
+			foreach(var hostname in hostnames)
+			{
+				Update(hostname);
+			}
+		}
+
+		/// <summary>
+		/// Updates the specified hostname via DNS-O-Matic with the public facing IP
+		/// Address for the system that the request is made from.
 		/// </summary>
 		/// <param name="hostname">The hostname to update.</param>
 		public void Update(string hostname)
@@ -54,7 +89,7 @@ namespace DnsOMaticClient.Net
 		}
 
 		/// <summary>
-		/// Updates the specified hostname via DNS-O-Matic to the ip address that is given.
+		/// Updates the specified hostname via DNS-O-Matic to the IP Address that is given.
 		/// </summary>
 		/// <param name="hostname">The hostname to update.</param>
 		/// <param name="ipAddress">The IP address to use.</param>
@@ -62,7 +97,7 @@ namespace DnsOMaticClient.Net
 		{
 			var updateUriFormat = "https://updates.dnsomatic.com/nic/update?hostname={0}&myip={1}&wildcard=NOCHG&mx=NOCHG&backmx=NOCHG";
 
-			var request = (HttpWebRequest)HttpWebRequest.Create(string.Format(updateUriFormat, hostname, ipAddress));
+			var request = (HttpWebRequest)HttpWebRequest.Create(string.Format(updateUriFormat, hostname.Trim(), ipAddress));
 			
 			request.Credentials = new NetworkCredential(Username, Password);
 
@@ -79,7 +114,7 @@ namespace DnsOMaticClient.Net
 			{
 				responseBody = stream.ReadToEnd();
 
-				logger.Info(string.Format("DNS-O-Matic update response: {0}", responseBody));
+				logger.Info(string.Format("DNS-O-Matic update response for hostname {0}: {1}", hostname, responseBody));
 			}
 			
 			//TODO: Handle Response Code
