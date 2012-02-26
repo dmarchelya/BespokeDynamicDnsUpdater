@@ -14,7 +14,7 @@ namespace DnsOMaticClient.Net.ConsoleApp
 			string password = ConfigurationManager.AppSettings["DnsOMaticPassword"];
 			string hostNameToUpdate = ConfigurationManager.AppSettings["HostNameToUpdate"];
 
-			var request = new DnsOMaticRequest(username, password);
+			var request = new DnsOMaticClient(username, password);
 
 			request.Update(hostNameToUpdate);
 

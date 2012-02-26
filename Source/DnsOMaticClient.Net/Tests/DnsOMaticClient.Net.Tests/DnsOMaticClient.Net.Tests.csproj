@@ -51,7 +51,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Base\BaseFixture.cs" />
-    <Compile Include="DnsOMaticRequestTests.cs" />
+    <Compile Include="DnsOMaticClientTests.cs" />
     <Compile Include="IpAddressResolverTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
