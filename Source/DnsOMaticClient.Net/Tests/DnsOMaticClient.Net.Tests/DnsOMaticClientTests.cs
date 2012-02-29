@@ -55,5 +55,31 @@ namespace DnsOMaticClient.Net.Tests
 			}
 		}
 
+		[Test]
+		[Ignore("Manual Test")]
+		public void CanUpdateAllHostnamesWithSpecifiedIPAddress()
+		{
+			var client = new DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
+
+			bool updated = client.UpdateAll("192.168.1.1");
+
+			Assert.IsTrue(updated);
+
+			Assert.AreEqual(UpdateStatusCode.Good, client.UpdateStatusCode);
+		}
+
+		[Test]
+		[Ignore("Manual Test")]
+		public void CanUpdateAllHostnamesWithRetrievedIPAddress()
+		{
+			var client = new DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
+
+			bool updated = client.UpdateAll();
+
+			Assert.IsTrue(updated);
+
+			Assert.AreEqual(UpdateStatusCode.Good, client.UpdateStatusCode);
+		}
+
 	}
 }

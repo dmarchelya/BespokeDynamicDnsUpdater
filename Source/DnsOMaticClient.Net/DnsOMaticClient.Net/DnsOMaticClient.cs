@@ -206,6 +206,32 @@ namespace DnsOMaticClient.Net
 			}
 		}
 
+
+		/// <summary>
+		/// Updates the all of the hostnames registered with DNS-O-Matic with the public facing IP
+		/// Address for the system that the request is made from.
+		/// </summary>
+		/// <returns>True if the update was successful</returns>
+		public bool UpdateAll()
+		{
+			const string updateAllMagicHostname = "all.dnsomatic.com";
+
+			return Update(updateAllMagicHostname);
+		}
+
+		/// <summary>
+		/// Updates the all of the hostnames registered with DNS-O-Matic with the specified
+		/// IP Address.
+		/// </summary>
+		/// <param name="ipAddress">The IP Address to use for updating the hostnames.</param>
+		/// <returns>True if the update was successful</returns>
+		public bool UpdateAll(string ipAddress)
+		{
+			const string updateAllMagicHostname = "all.dnsomatic.com";
+
+			return Update(updateAllMagicHostname, ipAddress);
+		}
+
 		#endregion Methods
 
 	}
