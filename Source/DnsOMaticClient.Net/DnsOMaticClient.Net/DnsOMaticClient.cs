@@ -160,47 +160,56 @@ namespace DnsOMaticClient.Net
 		/// <returns>True if the update was successful</returns>
 		public bool Update(string hostname, string ipAddress)
 		{
-			var updateUriFormat = "https://updates.dnsomatic.com/nic/update?hostname={0}&myip={1}&wildcard=NOCHG&mx=NOCHG&backmx=NOCHG";
-
-			var request = (HttpWebRequest)HttpWebRequest.Create(string.Format(updateUriFormat, hostname.Trim(), ipAddress));
-			
-			request.Credentials = new NetworkCredential(Username, Password);
-
-			var assembly = Assembly.GetExecutingAssembly();
-			var product = (AssemblyProductAttribute)assembly.GetCustomAttributes(typeof(AssemblyProductAttribute), false)[0];
-			var version = assembly.GetName().Version;
-
-			request.UserAgent = string.Format("Open Source - {0} - {1}", product.Product, version);
-
-			var response = request.GetResponse();
-
-			string responseBody = string.Empty;
-			using (StreamReader stream = new StreamReader(response.GetResponseStream()))
+			try
 			{
-				responseBody = stream.ReadToEnd();
+				var updateUriFormat = "https://updates.dnsomatic.com/nic/update?hostname={0}&myip={1}&wildcard=NOCHG&mx=NOCHG&backmx=NOCHG";
 
-				logger.Info(string.Format("DNS-O-Matic update response for hostname {0}: {1}", hostname, responseBody));
+				var request = (HttpWebRequest)HttpWebRequest.Create(string.Format(updateUriFormat, hostname.Trim(), ipAddress));
 
-				var regex = new Regex(@"\w+");
-				var match = regex.Match(responseBody);
+				request.Credentials = new NetworkCredential(Username, Password);
 
-				UpdateStatusCode statusCode;
+				var assembly = Assembly.GetExecutingAssembly();
+				var product = (AssemblyProductAttribute)assembly.GetCustomAttributes(typeof(AssemblyProductAttribute), false)[0];
+				var version = assembly.GetName().Version;
 
-				if(match.Success)
-				{	
-					statusCode = UpdateStatusCodeConverter.GetUpdateStatusCode(match.Value);		
-				}
-				else
+				request.UserAgent = string.Format("Open Source - {0} - {1}", product.Product, version);
+
+				var response = request.GetResponse();
+
+				string responseBody = string.Empty;
+				using (StreamReader stream = new StreamReader(response.GetResponseStream()))
 				{
-					statusCode = UpdateStatusCode.Unknown;
-				}
+					responseBody = stream.ReadToEnd();
 
-				UpdateStatusCodes.Add(hostname, statusCode);
+					logger.Info(string.Format("DNS-O-Matic update response for hostname {0}: {1}", hostname, responseBody));
 
-				if(statusCode == UpdateStatusCode.Good || statusCode == UpdateStatusCode.NoChange)
-				{
-					return true;
+					var regex = new Regex(@"\w+");
+					var match = regex.Match(responseBody);
+
+					UpdateStatusCode statusCode;
+
+					if (match.Success)
+					{
+						statusCode = UpdateStatusCodeConverter.GetUpdateStatusCode(match.Value);
+					}
+					else
+					{
+						statusCode = UpdateStatusCode.Unknown;
+					}
+
+					UpdateStatusCodes.Add(hostname, statusCode);
+
+					if (statusCode == UpdateStatusCode.Good || statusCode == UpdateStatusCode.NoChange)
+					{
+						return true;
+					}
+
+					return false;
 				}
+			}
+			catch (Exception ex)
+			{	
+				logger.Error(ex);
 
 				return false;
 			}
