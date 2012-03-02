@@ -5,6 +5,7 @@ using System.ServiceModel;
 using System.ServiceProcess;
 using System.Threading;
 using DnsOMaticClient.Net;
+using DnsOMaticClient.Net.Common;
 using log4net;
 
 namespace DnsOMaticClient.Net.WindowsService
@@ -35,9 +36,9 @@ namespace DnsOMaticClient.Net.WindowsService
 		{
 			try
 			{
-				username = ConfigurationManager.AppSettings["DnsOMaticUsername"];
-				password = ConfigurationManager.AppSettings["DnsOMaticPassword"];
-				hostnameToUpdate = ConfigurationManager.AppSettings["HostNameToUpdate"];
+				username = Config.DnsOMaticUsername;
+				password = Config.DnsOMaticPassword;
+				hostnameToUpdate = Config.HostnamesToUpdate;
 
 				if (string.IsNullOrEmpty(username))
 				{

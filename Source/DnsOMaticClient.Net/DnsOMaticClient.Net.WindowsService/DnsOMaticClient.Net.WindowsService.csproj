@@ -62,13 +62,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DnsOMaticClient.Net.Common\DnsOMaticClient.Net.Common.csproj">
+      <Project>{EB791BAE-7213-4055-9CFC-C1B42C02A353}</Project>
+      <Name>DnsOMaticClient.Net.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DNSoMaticClient.Net\DnsOMaticClient.Net.csproj">
       <Project>{0816EDAA-4416-4423-98DC-C422CA747BFE}</Project>
       <Name>DnsOMaticClient.Net</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
