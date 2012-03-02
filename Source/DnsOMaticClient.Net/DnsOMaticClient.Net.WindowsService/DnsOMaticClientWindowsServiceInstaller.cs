@@ -16,8 +16,9 @@ namespace DnsOMaticClient.Net.WindowsService
             processInstaller.Account = ServiceAccount.LocalSystem;
 
             serviceInstaller = new ServiceInstaller();
-			serviceInstaller.ServiceName = "DnsOMaticClientWindowsService";
+			serviceInstaller.ServiceName = Constants.ServiceName;
 			serviceInstaller.DisplayName = "DNS-O-Matic Client .Net Service";
+			serviceInstaller.Description = "An Open Source DNS-O-Matic Client that runs on a specified interval and updates dynamic DNS hostnames if necessary.";
 			serviceInstaller.StartType = ServiceStartMode.Automatic;
 
             Installers.Add(processInstaller);

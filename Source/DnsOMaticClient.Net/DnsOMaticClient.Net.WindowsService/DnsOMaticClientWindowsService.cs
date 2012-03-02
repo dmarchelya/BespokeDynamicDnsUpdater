@@ -12,9 +12,10 @@ namespace DnsOMaticClient.Net.WindowsService
 	public class DnsOMaticClientWindowsService : ServiceBase
 	{
 		private log4net.ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
 		private DnsOMaticClient dnsOMaticClient;
-		private TimeSpan updateStartDelay = new TimeSpan(0, 0, 15); //15 seconds
-		private TimeSpan updateInterval = new TimeSpan(0,5,0); // 5 minutes
+		private TimeSpan updateStartDelay = TimeSpan.FromSeconds(15);
+		private TimeSpan updateInterval = TimeSpan.FromSeconds(5);
 		private Timer timer = null;
 		private string username = string.Empty;
 		private string password = string.Empty;
@@ -22,7 +23,7 @@ namespace DnsOMaticClient.Net.WindowsService
 
 		public DnsOMaticClientWindowsService()
 		{
-			ServiceName = "DnsOMaticClientWindowsService";
+			ServiceName = Constants.ServiceName;
 		}
 
 		public static void Main()
@@ -32,28 +33,35 @@ namespace DnsOMaticClient.Net.WindowsService
 
 		protected override void OnStart(string[] args)
 		{
-			username = ConfigurationManager.AppSettings["DnsOMaticUsername"];
-			password = ConfigurationManager.AppSettings["DnsOMaticPassword"];
-			hostnameToUpdate = ConfigurationManager.AppSettings["HostNameToUpdate"];
-
-			if(string.IsNullOrEmpty(username))
+			try
 			{
-				throw new ArgumentException("Username was not provided");
-			}
+				username = ConfigurationManager.AppSettings["DnsOMaticUsername"];
+				password = ConfigurationManager.AppSettings["DnsOMaticPassword"];
+				hostnameToUpdate = ConfigurationManager.AppSettings["HostNameToUpdate"];
 
-			if (string.IsNullOrEmpty(password))
+				if (string.IsNullOrEmpty(username))
+				{
+					throw new ArgumentException("Username was not provided");
+				}
+
+				if (string.IsNullOrEmpty(password))
+				{
+					throw new ArgumentException("Password was not provided");
+				}
+
+				if (string.IsNullOrEmpty(hostnameToUpdate))
+				{
+					throw new ArgumentException("Hostname To Update was not provided");
+				}
+
+				dnsOMaticClient = new DnsOMaticClient(username, password);
+
+				timer = new Timer(Update, null, updateStartDelay, updateInterval);
+			}
+			catch (Exception ex)
 			{
-				throw new ArgumentException("Password was not provided");
+				logger.Error(ex);
 			}
-
-			if (string.IsNullOrEmpty(hostnameToUpdate))
-			{
-				throw new ArgumentException("Hostname To Update was not provided");
-			}
-
-			dnsOMaticClient = new DnsOMaticClient(username, password);
-
-			timer = new Timer(Update, null, updateStartDelay, updateInterval);
 		}
 
 		protected override void OnStop()
