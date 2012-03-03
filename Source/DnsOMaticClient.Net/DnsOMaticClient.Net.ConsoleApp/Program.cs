@@ -12,11 +12,11 @@ namespace DnsOMaticClient.Net.ConsoleApp
 		{
 			string username = ConfigurationManager.AppSettings["DnsOMaticUsername"];
 			string password = ConfigurationManager.AppSettings["DnsOMaticPassword"];
-			string hostNameToUpdate = ConfigurationManager.AppSettings["HostNameToUpdate"];
+			string hostnamesToUpdate = ConfigurationManager.AppSettings["HostNamesToUpdate"];
 
 			var request = new DnsOMaticClient(username, password);
 
-			request.Update(hostNameToUpdate);
+			request.UpdateHostnames(hostnamesToUpdate);
 
 			//Console.ReadLine();
 		}

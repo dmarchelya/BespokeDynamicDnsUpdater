@@ -30,6 +30,12 @@ namespace DnsOMaticClient.Net
 
 		#endregion Constructor
 
+		#region Constants
+
+		const string updateAllMagicHostname = "all.dnsomatic.com";
+
+		#endregion Constants
+
 		#region Fields
 
 		private log4net.ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -81,15 +87,12 @@ namespace DnsOMaticClient.Net
 		#region Methods
 
 		/// <summary>
-		/// Updates the specified hostnames via DNS-O-Matic with the public facing
+		/// Updates the given hostnames via DNS-O-Matic with the public facing
 		/// IP Address for the system that the request is made from.
 		/// </summary>
-		/// <param name="hostnames">The hostnames to update.</param>
-		/// <returns>
-		/// True if all updates were successful, otherwise false.
-		/// Check UpdateStatusCodes dictionary for individual hostname status.
-		/// </returns>
-		public bool Update(List<string> hostnames)
+		/// <param name="hostnames">A comma delimited list of hostnames to update.</param>
+		/// <returns>True, if all of the hostnames updated correctly, otherwise false.</returns>
+		public bool UpdateHostnames(string hostnames)
 		{
 			var resolver = new IpAddressResolver();
 
@@ -99,15 +102,45 @@ namespace DnsOMaticClient.Net
 
 			logger.Info(string.Format("Resolved public IP Address as {0}", ip));
 
-			bool allSuccess = true;
-			foreach (var hostname in hostnames)
-			{
-				bool success = Update(hostname, ip);
+			return UpdateHostnames(hostnames, ip);
+		}
 
-				if (success == false) allSuccess = false;
-			}
+		/// <summary>
+		/// Updates the given hostnames via DNS-O-Matic with the public facing
+		/// IP Address for the system that the request is made from.
+		/// </summary>
+		/// <param name="hostnames">A comma delimited list of hostnames to update.</param>
+		/// <param name="ipAddress">The IP Address to update to.</param>
+		/// <returns>True, if all of the hostnames updated correctly, otherwise false.</returns>
+		public bool UpdateHostnames(string hostnames, string ipAddress)
+		{
+			List<string> hostnamesList = new List<string>();
 
-			return allSuccess;
+			hostnames.Split(',').ToList().ForEach(h => hostnamesList.Add(h.Trim()));
+
+			return UpdateHostnames(hostnamesList, ipAddress);
+		}
+
+		/// <summary>
+		/// Updates the specified hostnames via DNS-O-Matic with the public facing
+		/// IP Address for the system that the request is made from.
+		/// </summary>
+		/// <param name="hostnames">The hostnames to update.</param>
+		/// <returns>
+		/// True if all updates were successful, otherwise false.
+		/// Check UpdateStatusCodes dictionary for individual hostname status.
+		/// </returns>
+		public bool UpdateHostnames(List<string> hostnames)
+		{
+			var resolver = new IpAddressResolver();
+
+			var ip = resolver.GetPublicIpAddress();
+
+			if (ip == null) return false;
+
+			logger.Info(string.Format("Resolved public IP Address as {0}", ip));
+
+			return UpdateHostnames(hostnames, ip);
 		}
 
 		/// <summary>
@@ -120,12 +153,12 @@ namespace DnsOMaticClient.Net
 		/// True if all updates were successful, otherwise false.
 		/// Check UpdateStatusCodes dictionary for individual hostname status.
 		/// </returns>
-		public bool Update(List<string> hostnames, string ipAddress)
+		public bool UpdateHostnames(List<string> hostnames, string ipAddress)
 		{
 			bool allSuccess = true;
 			foreach(var hostname in hostnames)
 			{
-				bool success = Update(hostname);
+				bool success = UpdateHostname(hostname, ipAddress);
 
 				if (success == false) allSuccess = false;
 			}
@@ -139,7 +172,7 @@ namespace DnsOMaticClient.Net
 		/// </summary>
 		/// <param name="hostname">The hostname to update.</param>
 		/// <returns>True if the update was successful</returns>
-		public bool Update(string hostname)
+		public bool UpdateHostname(string hostname)
 		{
 			var resolver = new IpAddressResolver();
 
@@ -149,7 +182,7 @@ namespace DnsOMaticClient.Net
 
 			logger.Info(string.Format("Resolved public IP Address as {0}", ip));
 
-			return Update(hostname, ip);
+			return UpdateHostname(hostname, ip);
 		}
 
 		/// <summary>
@@ -158,7 +191,7 @@ namespace DnsOMaticClient.Net
 		/// <param name="hostname">The hostname to update.</param>
 		/// <param name="ipAddress">The IP address to use.</param>		
 		/// <returns>True if the update was successful</returns>
-		public bool Update(string hostname, string ipAddress)
+		public bool UpdateHostname(string hostname, string ipAddress)
 		{
 			try
 			{
@@ -223,9 +256,7 @@ namespace DnsOMaticClient.Net
 		/// <returns>True if the update was successful</returns>
 		public bool UpdateAll()
 		{
-			const string updateAllMagicHostname = "all.dnsomatic.com";
-
-			return Update(updateAllMagicHostname);
+			return UpdateHostname(updateAllMagicHostname);
 		}
 
 		/// <summary>
@@ -236,9 +267,7 @@ namespace DnsOMaticClient.Net
 		/// <returns>True if the update was successful</returns>
 		public bool UpdateAll(string ipAddress)
 		{
-			const string updateAllMagicHostname = "all.dnsomatic.com";
-
-			return Update(updateAllMagicHostname, ipAddress);
+			return UpdateHostname(updateAllMagicHostname, ipAddress);
 		}
 
 		#endregion Methods

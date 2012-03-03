@@ -16,11 +16,11 @@ namespace DnsOMaticClient.Net.WindowsService
 
 		private DnsOMaticClient dnsOMaticClient;
 		private TimeSpan updateStartDelay = TimeSpan.FromSeconds(15);
-		private TimeSpan updateInterval = TimeSpan.FromSeconds(5);
+		private TimeSpan updateInterval = TimeSpan.FromMinutes(5);
 		private Timer timer = null;
 		private string username = string.Empty;
 		private string password = string.Empty;
-		private string hostnameToUpdate = string.Empty;
+		private string hostnamesToUpdate = string.Empty;
 
 		public DnsOMaticClientWindowsService()
 		{
@@ -38,7 +38,7 @@ namespace DnsOMaticClient.Net.WindowsService
 			{
 				username = Config.DnsOMaticUsername;
 				password = Config.DnsOMaticPassword;
-				hostnameToUpdate = Config.HostnamesToUpdate;
+				hostnamesToUpdate = Config.HostnamesToUpdate;
 
 				if (string.IsNullOrEmpty(username))
 				{
@@ -50,9 +50,9 @@ namespace DnsOMaticClient.Net.WindowsService
 					throw new ArgumentException("Password was not provided");
 				}
 
-				if (string.IsNullOrEmpty(hostnameToUpdate))
+				if (string.IsNullOrEmpty(hostnamesToUpdate))
 				{
-					throw new ArgumentException("Hostname To Update was not provided");
+					throw new ArgumentException("Hostnames To Update were not provided");
 				}
 
 				dnsOMaticClient = new DnsOMaticClient(username, password);
@@ -75,7 +75,7 @@ namespace DnsOMaticClient.Net.WindowsService
 
 		private void Update(object data)
 		{
-			dnsOMaticClient.Update(hostnameToUpdate);
+			dnsOMaticClient.UpdateHostnames(hostnamesToUpdate);
 		}
 	}
 }

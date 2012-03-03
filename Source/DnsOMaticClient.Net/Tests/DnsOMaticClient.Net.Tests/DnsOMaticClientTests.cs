@@ -21,7 +21,7 @@ namespace DnsOMaticClient.Net.Tests
 		{
 			var client = new DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
 
-			bool updated = client.Update(hostnameToUpdate, "192.168.1.1");
+			bool updated = client.UpdateHostname(hostnameToUpdate, "192.168.1.1");
 
 			Assert.IsTrue(updated);
 			Assert.AreEqual(UpdateStatusCode.Good, client.UpdateStatusCode);
@@ -33,7 +33,7 @@ namespace DnsOMaticClient.Net.Tests
 		{
 			var client = new DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
 
-			bool updated = client.Update(hostnameToUpdate);
+			bool updated = client.UpdateHostname(hostnameToUpdate);
 
 			Assert.IsTrue(updated);
 			Assert.AreEqual(UpdateStatusCode.Good, client.UpdateStatusCode);
@@ -45,7 +45,7 @@ namespace DnsOMaticClient.Net.Tests
 		{
 			var client = new DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
 
-			bool updated = client.Update(new List<string>() {hostnameToUpdate, hostnameToUpdate2});
+			bool updated = client.UpdateHostnames(new List<string>() {hostnameToUpdate, hostnameToUpdate2});
 
 			Assert.IsTrue(updated);
 
@@ -79,6 +79,19 @@ namespace DnsOMaticClient.Net.Tests
 			Assert.IsTrue(updated);
 
 			Assert.AreEqual(UpdateStatusCode.Good, client.UpdateStatusCode);
+		}
+
+		[Test]
+		public void CanCreateAndTrimList()
+		{
+			string hostnames = "test.com , test2.com, test3.com ";
+			var hostnamesList = new List<string>();
+
+			hostnames.Split(',').ToList().ForEach(h => hostnamesList.Add(h.Trim()));
+
+			Assert.AreEqual("test.com", hostnamesList[0]);
+			Assert.AreEqual("test2.com", hostnamesList[1]);
+			Assert.AreEqual("test3.com", hostnamesList[2]);			
 		}
 
 	}
