@@ -12,13 +12,15 @@ namespace DnsOMaticClient.Net
 	{
 		public string GetPublicIpAddress()
 		{
-			return GetPublicIpAddressFromDynDns();
+			//Since this is a DNS-O-Matic Updater Client, we use the DNS-O-Matic service to retrieve the Public IP Address
+			//TODO: Make the IP Address Resolution Service configurable.
+			return GetPublicIpAddressFromDnsOMatic();
 		}
 
 		/// <summary>
 		/// Retrieve the public IP address from DNS-O-Matic at http://myip.dnsomatic.com/
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>The public IP Address.</returns>
 		public string GetPublicIpAddressFromDnsOMatic()
 		{
 			string uri = "http://myip.dnsomatic.com/";
@@ -57,7 +59,7 @@ namespace DnsOMaticClient.Net
 		/// <summary>
 		/// Get the public IP Address from DynDns at: http://checkip.dyndns.org/
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>The public IP Address.</returns>
 		public string GetPublicIpAddressFromDynDns()
 		{
 			string uri = "http://checkip.dyndns.org/";
