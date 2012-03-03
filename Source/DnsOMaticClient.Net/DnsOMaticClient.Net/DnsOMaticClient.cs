@@ -40,6 +40,7 @@ namespace DnsOMaticClient.Net
 
 		private log4net.ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		private Dictionary<string, UpdateStatusCode> updateStatusCodes = new Dictionary<string, UpdateStatusCode>();
+		private Dictionary<string, string> lastUpdatedIpAddresses = new Dictionary<string, string>();
 
 		#endregion Fields
 
@@ -75,10 +76,35 @@ namespace DnsOMaticClient.Net
 			{
 				if (UpdateStatusCodes.Keys.Count > 1)
 				{
-					throw new InvalidOperationException("Multiple Hosts were updated, use UpdateStatusCodes instead.");
+					throw new InvalidOperationException("Multiple Hostnames were updated, use UpdateStatusCodes instead.");
 				}
 
 				return UpdateStatusCodes[UpdateStatusCodes.Keys.ElementAt(0)];
+			}
+		}
+
+		/// <summary>
+		/// A Dictionary of the last ip address that was successfully updated for a given hostname.
+		/// </summary>
+		public Dictionary<string, string> LastUpdateIpAddresses
+		{
+			get { return lastUpdatedIpAddresses; }
+		}
+
+		/// <summary>
+		/// The IP Address that was set, when a single hostname is updated.
+		/// Throws InvalidOperationException when attempting to update multiple hostnames.
+		/// </summary> 
+		public string LastUpdateIpAddress
+		{
+			get
+			{
+				if (LastUpdateIpAddresses.Keys.Count > 1)
+				{
+					throw new InvalidOperationException("Multiple Hostnames were updated, use LastUpdateIpAddress instead.");
+				}
+
+				return LastUpdateIpAddresses[LastUpdateIpAddresses.Keys.ElementAt(0)];
 			}
 		}
 
@@ -190,11 +216,17 @@ namespace DnsOMaticClient.Net
 		/// </summary>
 		/// <param name="hostname">The hostname to update.</param>
 		/// <param name="ipAddress">The IP address to use.</param>		
-		/// <returns>True if the update was successful</returns>
+		/// <returns>True if the update was successful or there was no change in the IP Address.</returns>
 		public bool UpdateHostname(string hostname, string ipAddress)
 		{
 			try
 			{
+				if(LastUpdateIpAddresses.ContainsKey(hostname)  && LastUpdateIpAddresses[hostname] == ipAddress)
+				{
+					logger.Info(string.Format("No need to update hostname {0}, the IP Address ({1}) hasn't changed.", hostname, ipAddress));
+					return true;
+				}
+
 				var updateUriFormat = "https://updates.dnsomatic.com/nic/update?hostname={0}&myip={1}&wildcard=NOCHG&mx=NOCHG&backmx=NOCHG";
 
 				var request = (HttpWebRequest)HttpWebRequest.Create(string.Format(updateUriFormat, hostname.Trim(), ipAddress));
@@ -230,10 +262,11 @@ namespace DnsOMaticClient.Net
 						statusCode = UpdateStatusCode.Unknown;
 					}
 
-					UpdateStatusCodes.Add(hostname, statusCode);
+					UpdateStatusCodes[hostname] = statusCode;
 
 					if (statusCode == UpdateStatusCode.Good || statusCode == UpdateStatusCode.NoChange)
 					{
+						LastUpdateIpAddresses[hostname] = ipAddress;
 						return true;
 					}
 

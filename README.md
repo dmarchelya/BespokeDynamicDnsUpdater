@@ -12,6 +12,10 @@ DNS-O-Matic Client .NET can be run in two different configurations:
 
 2. As a Windows service.  The service can be installed from the command line (a batch script is provided), or via a Windows Setup.exe application.  When installed via the command line, DNS-O-Matic credentials and hostnames are supplied in the application configuration file.  When installed via the Setup.exe, the installation wizard prompts for DNS-O-Matic credentials and hostnames.
 
+**How Often Does the DNS-O-Matic Client .NET Update My IP Addresses?**
+
+When run as a Windows Service, the updater checks if the IP Address has changed every 5 minutes.  If the IP Address has changed since the last check, the client will updated the IP Address with the DNS-O-Matic service, otherwise no update is sent to DNS-O-Matic.
+
 ----------
 
 
