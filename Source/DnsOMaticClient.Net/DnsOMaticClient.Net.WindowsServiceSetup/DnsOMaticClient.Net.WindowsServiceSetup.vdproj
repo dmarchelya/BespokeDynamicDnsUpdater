@@ -161,7 +161,7 @@
             "Sequence" = "3:1"
             "Identifier" = "8:_9066A52B_8158_40D8_957D_D25D642E4CC7"
             "InstallerClass" = "11:TRUE"
-            "CustomActionData" = "8:/Username=[USERNAME] /Password=[PASSWORD] /Hostnames=[HOSTNAMES] /TargetDir=\"[TARGETDIR]\\\""
+            "CustomActionData" = "8:/Username=\"[USERNAME]\" /Password=\"[PASSWORD]\" /Hostnames=\"[HOSTNAMES]\" /TargetDir=\"[TARGETDIR]\\\""
             }
             "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_7B2A9832DA2E4A21942F359E62D58D4A"
             {
@@ -350,7 +350,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Dns-O-Matic Client .Net"
         "ProductCode" = "8:{58D49CD9-863C-48EE-98C6-7881C83E9731}"
-        "PackageCode" = "8:{2B964D5D-A596-4DC7-93B6-945D401A8193}"
+        "PackageCode" = "8:{27C4D7EA-C583-4659-AFB5-53B4D7850695}"
         "UpgradeCode" = "8:{C970C20A-C31F-482B-8FE3-8EDE7E85F298}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
