@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnsOMaticClient.Net", "DNSoMaticClient.Net\DnsOMaticClient.Net.csproj", "{0816EDAA-4416-4423-98DC-C422CA747BFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnsOMaticClient.Net", "DnsOMaticClient.Net\DnsOMaticClient.Net.csproj", "{0816EDAA-4416-4423-98DC-C422CA747BFE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0F3B5534-A301-4FA0-B667-4D61AC153209}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnsOMaticClient.Net.Tests", "Tests\DNSoMaticClient.Net.Tests\DnsOMaticClient.Net.Tests.csproj", "{D8DE737D-7EE4-474E-9313-DDB3FC85769F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnsOMaticClient.Net.Tests", "Tests\DnsOMaticClient.Net.Tests\DnsOMaticClient.Net.Tests.csproj", "{D8DE737D-7EE4-474E-9313-DDB3FC85769F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{859B38B7-2E19-40FB-BC0D-61EBE7F6F2A9}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,9 +16,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnsOMaticClient.Net.Console
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnsOMaticClient.Net.WindowsService", "DnsOMaticClient.Net.WindowsService\DnsOMaticClient.Net.WindowsService.csproj", "{7BD9846A-C29F-4162-8251-78902045F589}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DnsOMaticClient.Net.WindowsServiceSetup", "DnsOMaticClient.Net.WindowsServiceSetup\DnsOMaticClient.Net.WindowsServiceSetup.vdproj", "{C6E891EA-9D2D-4F02-B970-C0E12ECD3B3D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnsOMaticClient.Net.Common", "DnsOMaticClient.Net.Common\DnsOMaticClient.Net.Common.csproj", "{EB791BAE-7213-4055-9CFC-C1B42C02A353}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DnsOMaticClient.Net.WindowsServiceSetup", "DnsOMaticClient.Net.WindowsServiceSetup\DnsOMaticClient.Net.WindowsServiceSetup.vdproj", "{C53A642D-8568-4D14-B728-93D1D229B32F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,12 +70,6 @@ Global
 		{7BD9846A-C29F-4162-8251-78902045F589}.Release|Mixed Platforms.Build.0 = Release|x86
 		{7BD9846A-C29F-4162-8251-78902045F589}.Release|x86.ActiveCfg = Release|x86
 		{7BD9846A-C29F-4162-8251-78902045F589}.Release|x86.Build.0 = Release|x86
-		{C6E891EA-9D2D-4F02-B970-C0E12ECD3B3D}.Debug|Any CPU.ActiveCfg = Debug
-		{C6E891EA-9D2D-4F02-B970-C0E12ECD3B3D}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{C6E891EA-9D2D-4F02-B970-C0E12ECD3B3D}.Debug|x86.ActiveCfg = Debug
-		{C6E891EA-9D2D-4F02-B970-C0E12ECD3B3D}.Release|Any CPU.ActiveCfg = Release
-		{C6E891EA-9D2D-4F02-B970-C0E12ECD3B3D}.Release|Mixed Platforms.ActiveCfg = Release
-		{C6E891EA-9D2D-4F02-B970-C0E12ECD3B3D}.Release|x86.ActiveCfg = Release
 		{EB791BAE-7213-4055-9CFC-C1B42C02A353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EB791BAE-7213-4055-9CFC-C1B42C02A353}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB791BAE-7213-4055-9CFC-C1B42C02A353}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -86,6 +80,18 @@ Global
 		{EB791BAE-7213-4055-9CFC-C1B42C02A353}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EB791BAE-7213-4055-9CFC-C1B42C02A353}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EB791BAE-7213-4055-9CFC-C1B42C02A353}.Release|x86.ActiveCfg = Release|Any CPU
+		{C53A642D-8568-4D14-B728-93D1D229B32F}.Debug|Any CPU.ActiveCfg = Debug
+		{C53A642D-8568-4D14-B728-93D1D229B32F}.Debug|Any CPU.Build.0 = Debug
+		{C53A642D-8568-4D14-B728-93D1D229B32F}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{C53A642D-8568-4D14-B728-93D1D229B32F}.Debug|Mixed Platforms.Build.0 = Debug
+		{C53A642D-8568-4D14-B728-93D1D229B32F}.Debug|x86.ActiveCfg = Debug
+		{C53A642D-8568-4D14-B728-93D1D229B32F}.Debug|x86.Build.0 = Debug
+		{C53A642D-8568-4D14-B728-93D1D229B32F}.Release|Any CPU.ActiveCfg = Release
+		{C53A642D-8568-4D14-B728-93D1D229B32F}.Release|Any CPU.Build.0 = Release
+		{C53A642D-8568-4D14-B728-93D1D229B32F}.Release|Mixed Platforms.ActiveCfg = Release
+		{C53A642D-8568-4D14-B728-93D1D229B32F}.Release|Mixed Platforms.Build.0 = Release
+		{C53A642D-8568-4D14-B728-93D1D229B32F}.Release|x86.ActiveCfg = Release
+		{C53A642D-8568-4D14-B728-93D1D229B32F}.Release|x86.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

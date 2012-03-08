@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>    
+    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\..\..\..\Build\MSBuild\MSBuildCommunityTasks\</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SharedAssemblyInfoFile>$(MSBuildProjectDirectory)\..\SolutionItems\SharedAssemblyInfo.cs</SharedAssemblyInfoFile>
+    <WindowServiceSetupProjectFile>$(MSBuildProjectDirectory)\..\DnsOMaticClient.Net.WindowsServiceSetup\DnsOMaticClient.Net.WindowsServiceSetup.vdproj</WindowServiceSetupProjectFile>
+  </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -77,11 +84,33 @@
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
+  <Import Project="$(MSBuildProjectDirectory)\..\..\..\Build\MSBuild\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />  
   <Target Name="BeforeBuild">
   </Target>
+  
   <Target Name="AfterBuild">
+    <CallTarget Targets="UpdateWindowsSetupProjectVersion" Condition="'$(Configuration)' == 'Release'" />
   </Target>
-  -->
+
+  <Target Name="UpdateWindowsSetupProjectVersion">
+    <ReadLinesFromFile File="$(SharedAssemblyInfoFile)">
+      <Output TaskParameter="Lines" ItemName="SharedAssemblyInfoFileContents" />
+    </ReadLinesFromFile>
+    <RegexMatch Input="@(SharedAssemblyInfoFileContents)" Expression="AssemblyFileVersion\(\&quot;(\d+)\.(\d+)\.(\d+)\.(\d+)\&quot;\)\]">
+      <Output ItemName="AssemblyVersionMatch" TaskParameter="Output" />
+    </RegexMatch>
+    <RegexReplace Input="@(AssemblyVersionMatch)" Expression="AssemblyFileVersion\(\&quot;(\d+)\.(\d+)\.(\d+)\.(\d+)\&quot;\)" Replacement="$1.$2.$3" Count="1">
+      <Output PropertyName="SetupVersionNumberRaw" TaskParameter="Output"/>
+    </RegexReplace>
+    <!--
+    There's a bug with the RegexMatch / RegexReplace where part of the line that is matched is being included when referencing
+    the capturing groups for the version, and it should be.  So we Replace those strings below.
+    -->
+    <CreateProperty Value="$(SetupVersionNumberRaw.Replace('[assembly: ', '').Replace(']',''))">
+      <Output TaskParameter="Value" PropertyName="SetupVersionNumber" />
+    </CreateProperty>
+    <FileUpdate Files="$(WindowServiceSetupProjectFile)" Regex="\&quot;ProductVersion&quot; = \&quot;8:(\d+)\.(\d+)\.(\d+)\&quot;" ReplacementText="&quot;ProductVersion&quot; = &quot;8:$(SetupVersionNumber)&quot;" />
+  </Target>
+    
+  
 </Project>
