@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Configuration.Install;
 using DnsOMaticClient.Net.Common;
 using log4net;
+using System.Diagnostics;
 
 namespace DnsOMaticClient.Net.WindowsService
 {
@@ -81,6 +82,8 @@ namespace DnsOMaticClient.Net.WindowsService
 		{
 			base.OnAfterInstall(savedState);
 
+            SetRecoveryOptions();
+
 			ServiceController controller = new ServiceController(Constants.ServiceName);
 			controller.Start();
 		}
@@ -110,5 +113,40 @@ namespace DnsOMaticClient.Net.WindowsService
 			base.Uninstall(savedState);
 		}
 
+        private void SetRecoveryOptions()
+        {
+            try
+            {
+                int exitCode;
+                using (var process = new Process())
+                {
+                    var startInfo = process.StartInfo;
+                    startInfo.FileName = "sc";
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
+                    const int reset = 86400; //1 day until the recovery attempt counter resets
+                    const int restartDelay1 = 60000; //1 Minute
+                    const int restartDelay2 = 300000; //5 Minutes
+                    const int restartDelay3 = 1800000; //30 Minutes
+
+                    //http://technet.microsoft.com/en-us/library/cc742019%28v=ws.10%29.aspx
+                    startInfo.Arguments = string.Format("failure {0} reset= {1} actions= restart/{2}/restart/{3}/restart{4}", Constants.ServiceName, reset, restartDelay1, restartDelay2, restartDelay3);
+
+                    process.Start();
+                    process.WaitForExit();
+
+                    exitCode = process.ExitCode;
+
+                    process.Close();
+                }
+
+                if (exitCode != 0)
+                    throw new InvalidOperationException("Exit Code: " + exitCode);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+            }
+        }
 	}
 }
