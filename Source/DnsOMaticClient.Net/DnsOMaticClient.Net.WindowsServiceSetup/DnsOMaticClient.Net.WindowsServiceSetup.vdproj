@@ -45,6 +45,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_DF6139B8BE774158B3B67758EA01239C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_3F5791D41A524DC9A66BF42E53443773"
         "MsmSig" = "8:_UNDEFINED"
@@ -52,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5AC7C43DF91305E8AF5CFD367BF11D2D"
+        "OwnerKey" = "8:_1510E52D80366BBBB4A95129D47B153F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -64,7 +70,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1510E52D80366BBBB4A95129D47B153F"
+        "OwnerKey" = "8:_5AC7C43DF91305E8AF5CFD367BF11D2D"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -207,11 +213,6 @@
             "AssemblyAsmDisplayName" = "8:log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_1510E52D80366BBBB4A95129D47B153F"
-                    {
-                    "Name" = "8:log4net.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:log4net.dll"
             "TargetName" = "8:"
@@ -238,11 +239,6 @@
             "AssemblyAsmDisplayName" = "8:DnsOMaticClient.Net.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_52F0F044E0DF42155C89CEA29ABE4B03"
-                    {
-                    "Name" = "8:DnsOMaticClient.Net.Common.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:DnsOMaticClient.Net.Common.dll"
             "TargetName" = "8:"
@@ -269,11 +265,6 @@
             "AssemblyAsmDisplayName" = "8:DnsOMaticClient.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5AC7C43DF91305E8AF5CFD367BF11D2D"
-                    {
-                    "Name" = "8:DnsOMaticClient.Net.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:DnsOMaticClient.Net.dll"
             "TargetName" = "8:"
@@ -291,6 +282,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DF6139B8BE774158B3B67758EA01239C"
+            {
+            "SourcePath" = "8:DnsOMaticClientNet.ico"
+            "TargetName" = "8:DnsOMaticClientNet.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_47B9136041BF4C4885C5845E908862AF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -367,7 +378,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:https://github.com/dmarchelya/DnsOMaticClient.Net"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_DF6139B8BE774158B3B67758EA01239C"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
