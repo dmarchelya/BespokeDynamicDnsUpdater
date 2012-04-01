@@ -1,0 +1,16 @@
+DNS-O-Matic CLient .NET Release Notes
+-------------------------------------
+
+v1.0.1
+------
+- Setting recovery options when using the the Windows Setup Project that attempt to restart the service on failure.
+- Added an icon for the Add/Remove Programs interface.
+
+
+v1.0.0
+------
+
+- Initial Release
+- Windows Service that can be installed with the included Windows Setup Project.
+- Command Line Application that can be run via batch script as a Scheduled Task or otherwise.
+- Versioning all assemblies and programs from an MSBuild script that is run when compiling in release mode.  Uses the version that is defined in SharedAssemblyInfo.cs.
