@@ -1,4 +1,4 @@
-DNS-O-Matic CLient .NET Release Notes
+DNS-O-Matic Client .NET Release Notes
 -------------------------------------
 
 v1.0.1
