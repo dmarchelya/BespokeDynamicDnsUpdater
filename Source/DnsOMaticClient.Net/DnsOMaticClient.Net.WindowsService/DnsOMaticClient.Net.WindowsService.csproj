@@ -101,15 +101,24 @@
       <Output ItemName="AssemblyVersionMatch" TaskParameter="Output" />
     </RegexMatch>
     <RegexReplace Input="@(AssemblyVersionMatch)" Expression="AssemblyFileVersion\(\&quot;(\d+)\.(\d+)\.(\d+)\.(\d+)\&quot;\)" Replacement="$1.$2.$3" Count="1">
-      <Output PropertyName="SetupVersionNumberRaw" TaskParameter="Output" />
+      <Output PropertyName="ProductVersionRaw" TaskParameter="Output" />
     </RegexReplace>
     <!--
     There's a bug with the RegexMatch / RegexReplace where part of the line that is matched is being included when referencing
     the capturing groups for the version, and it should be.  So we Replace those strings below.
     -->
-    <CreateProperty Value="$(SetupVersionNumberRaw.Replace('[assembly: ', '').Replace(']',''))">
-      <Output TaskParameter="Value" PropertyName="SetupVersionNumber" />
+    <CreateProperty Value="$(ProductVersionRaw.Replace('[assembly: ', '').Replace(']',''))">
+      <Output TaskParameter="Value" PropertyName="ProductVersion" />
     </CreateProperty>
-    <FileUpdate Files="$(WindowServiceSetupProjectFile)" Regex="\&quot;ProductVersion&quot; = \&quot;8:(\d+)\.(\d+)\.(\d+)\&quot;" ReplacementText="&quot;ProductVersion&quot; = &quot;8:$(SetupVersionNumber)&quot;" />
+    <ReadLinesFromFile File="$(WindowServiceSetupProjectFile)">
+      <Output TaskParameter="Lines" ItemName="WindowServiceSetupProjectFileContents" />
+    </ReadLinesFromFile>
+    <RegexMatch Input="@(WindowServiceSetupProjectFileContents)" Expression="\&quot;ProductVersion&quot; = \&quot;8:(\d+)\.(\d+)\.(\d+)\&quot;">
+      <Output ItemName="WindowsSetupProjectFileProductVersionMatch" TaskParameter="Output" />
+    </RegexMatch>
+    <RegexReplace Input="@(WindowsSetupProjectFileProductVersionMatch)" Expression="\&quot;ProductVersion&quot; = \&quot;8:(\d+)\.(\d+)\.(\d+)\&quot;" Replacement="$1.$2.$3" Count="1">
+      <Output PropertyName="OldWindowsSetupProjectProductVersion" TaskParameter="Output" />
+    </RegexReplace>
+    <FileUpdate Condition="'$(OldWindowsSetupProjectProductVersion)' != '$(ProductVersion)'" Files="$(WindowServiceSetupProjectFile)" Regex="\&quot;ProductVersion&quot; = \&quot;8:(\d+)\.(\d+)\.(\d+)\&quot;" ReplacementText="&quot;ProductVersion&quot; = &quot;8:$(ProductVersion)&quot;" />
   </Target>
 </Project>
