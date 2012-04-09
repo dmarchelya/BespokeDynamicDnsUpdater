@@ -112,6 +112,29 @@ namespace DnsOMaticClient.Net
 
 		#region Methods
 
+        /// <summary>
+        /// Initialize the LastUpdateIpAddresses collection with the current IP Address (in DNS) for each of the given hostnames.
+        /// This can be used when the client is run for the first time, when we don't have a record of what the previous IP
+        /// Address was that was sent to DNS-O-Matic.  This way we won't have to attempt to update the IP Address, if the current
+        /// DNS entry matches the current IP Address.
+        /// </summary>
+        /// <param name="hostnames">The hostnames to update.</param>
+        public void InitializeLastUpdateIpAddresses(string hostnames)
+        {
+            var resolver = new IpAddressResolver();
+            var hostnamesList = HostnamesToList(hostnames);
+
+            foreach(var hostname in hostnamesList)
+            {
+                var ipAddress = resolver.GetIpAddressForHostname(hostname);
+
+                if(ipAddress != null)
+                {
+                    LastUpdateIpAddresses[hostname] = ipAddress;
+                }
+            }
+        }
+
 		/// <summary>
 		/// Updates the given hostnames via DNS-O-Matic with the public facing
 		/// IP Address for the system that the request is made from.
@@ -140,9 +163,7 @@ namespace DnsOMaticClient.Net
 		/// <returns>True, if all of the hostnames updated correctly, otherwise false.</returns>
 		public bool UpdateHostnames(string hostnames, string ipAddress)
 		{
-			List<string> hostnamesList = new List<string>();
-
-			hostnames.Split(',').ToList().ForEach(h => hostnamesList.Add(h.Trim()));
+		    var hostnamesList = HostnamesToList(hostnames);
 
 			return UpdateHostnames(hostnamesList, ipAddress);
 		}
@@ -305,5 +326,22 @@ namespace DnsOMaticClient.Net
 
 		#endregion Methods
 
-	}
+        #region Helper Methods
+
+        /// <summary>
+        /// Takes a comma seperated string of hostnames and converts it to a List of hostnames.
+        /// </summary>
+        /// <param name="hostnames"></param>
+        /// <returns></returns>
+        private static List<string> HostnamesToList(string hostnames)
+        {
+            var hostnamesList = new List<string>();
+
+            hostnames.Split(',').ToList().ForEach(h => hostnamesList.Add(h.Trim()));
+
+            return hostnamesList;
+        }
+
+        #endregion Helper Methods
+    }
 }

@@ -10,6 +10,30 @@ namespace DnsOMaticClient.Net
 {
 	public class IpAddressResolver
 	{
+        /// <summary>
+        /// Submits a dns request for the given hostname and returns the IP address that it resolves to.
+        /// </summary>
+        /// <param name="hostname">The hostname to get an IP address for.</param>
+        /// <returns>The IP Address.</returns>
+        public string GetIpAddressForHostname(string hostname)
+        {
+            try
+            {
+                var hostEntry = Dns.GetHostEntry(hostname);
+
+                if (hostEntry.AddressList.Count() > 0)
+                {
+                    return hostEntry.AddressList.First().ToString();
+                }
+
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
 		public string GetPublicIpAddress()
 		{
 			//Since this is a DNS-O-Matic Updater Client, we use the DNS-O-Matic service to retrieve the Public IP Address

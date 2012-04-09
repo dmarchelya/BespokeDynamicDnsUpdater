@@ -8,9 +8,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnsOMaticClient.Net.Tests", "Tests\DnsOMaticClient.Net.Tests\DnsOMaticClient.Net.Tests.csproj", "{D8DE737D-7EE4-474E-9313-DDB3FC85769F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{859B38B7-2E19-40FB-BC0D-61EBE7F6F2A9}"
-	ProjectSection(SolutionItems) = preProject
-		SolutionItems\SharedAssemblyInfo.cs = SolutionItems\SharedAssemblyInfo.cs
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnsOMaticClient.Net.ConsoleApp", "DnsOMaticClient.Net.ConsoleApp\DnsOMaticClient.Net.ConsoleApp.csproj", "{C096ACF0-3626-41DF-8E3F-D19EA38B5950}"
 EndProject

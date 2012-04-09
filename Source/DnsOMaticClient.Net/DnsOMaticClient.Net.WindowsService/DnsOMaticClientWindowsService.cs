@@ -56,6 +56,7 @@ namespace DnsOMaticClient.Net.WindowsService
 				}
 
 				dnsOMaticClient = new DnsOMaticClient(username, password);
+			    dnsOMaticClient.InitializeLastUpdateIpAddresses(hostnamesToUpdate);
 
 				timer = new Timer(Update, null, updateStartDelay, updateInterval);
 			}

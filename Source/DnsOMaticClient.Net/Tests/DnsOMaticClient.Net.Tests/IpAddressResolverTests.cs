@@ -27,5 +27,23 @@ namespace DnsOMaticClient.Net.Tests
 
 			Assert.AreEqual(ExpectedPublicIpAddress, ip);
 		}
-	}
+
+        [Test]
+        public void CanGetIpAddressForHostname()
+        {
+            var resolver = new IpAddressResolver();
+            var ip = resolver.GetIpAddressForHostname("bespokeindustries.com");
+
+            Assert.AreEqual("204.246.37.132", ip);
+        }
+
+        [Test]
+        public void GetIpAddressForInvalidHostnameReturnsNull()
+        {
+            var resolver = new IpAddressResolver();
+            var ip = resolver.GetIpAddressForHostname("bogus93937329923.bespokeindustries.com");
+
+            Assert.IsNull(ip);
+        }
+    }
 }
