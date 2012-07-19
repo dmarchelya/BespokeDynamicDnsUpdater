@@ -1,22 +1,22 @@
-# DNS-O-Matic Client .NET #
+# Bespoke Dynamic DNS Updater #
 
-DNS-O-Matic Client .NET is an open source dynamic dns hostname updater client for [DNS-O-Matic](http://www.dnsomatic.com).  It runs on Windows and is written in C# and is built on the .NET Framework 4.
+Bespoke Dynamic DNS Updater is an open source dynamic dns hostname updater client for [DNS-O-Matic](http://www.dnsomatic.com).  It runs on Windows and is written in C# and is built on the .NET Framework 4.
 
 DNS-O-Matic is a service that enables you to install a single updater client on your computer, and update hostnames at one or more of the [dozens](http://www.dnsomatic.com/wiki/supportedservices) of dynamic dns providers that DNS-O-Matic supports.
 
-A Windows Installer is available at the Bespoke Industries [DNS-O-Matic Client .NET Product Page](http://bespokeindustries.com/products/dnsomatic-client-net).  This is the best place to download the installer without having to compile source code.
+A Windows Installer is available on GitHub ([Github Downloads](https://github.com/dmarchelya/BespokeDynamicDnsUpdater/downloads)).  This is the best place to download the installer without having to compile source code.
 
-**How Do I Run DNS-O-Matic Client .NET?**
+**How Do I Run Bespoke Dynamic DNS Updater?**
 
-DNS-O-Matic Client .NET can be run in two different configurations:
+Bespoke Dynamic DNS Updater can be run in two different configurations:
 
 1. As a console application.  DNS-O-Matic credentials and hostnames are supplied in the application configuration file, and the console application can be run manually, or via a scheduled task.
 
 2. As a Windows service.  The service can be installed from the command line (a batch script is provided), or via a Windows Setup.exe application.  When installed via the command line, DNS-O-Matic credentials and hostnames are supplied in the application configuration file.  When installed via the Setup.exe, the installation wizard prompts for DNS-O-Matic credentials and hostnames.
 
-**How Often Does the DNS-O-Matic Client .NET Update My IP Addresses?**
+**How Often Does the Bespoke Dynamic DNS Updater Update My IP Addresses?**
 
-When run as a Windows Service, the updater checks if the IP Address has changed every 5 minutes.  If the IP Address has changed since the last check, the client will updated the IP Address with the DNS-O-Matic service, otherwise no update is sent to DNS-O-Matic.
+When run as a Windows Service, the updater checks if the IP Address has changed every 5 minutes.  If the IP Address has changed since the last check, the client will update the IP Address with the DNS-O-Matic service, otherwise no update is sent to DNS-O-Matic.
 
 ----------
 
