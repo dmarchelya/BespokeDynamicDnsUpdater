@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using Bespoke.DynamicDnsUpdater;
 using Bespoke.DynamicDnsUpdater.Client;
+using Bespoke.DynamicDnsUpdater.Client.DnsOMatic;
 
 namespace BespokeDynamicDnsUpdater.ConsoleApp
 {

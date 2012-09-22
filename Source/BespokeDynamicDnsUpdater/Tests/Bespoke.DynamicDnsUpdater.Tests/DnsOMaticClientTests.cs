@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Bespoke.DynamicDnsUpdater.Client;
+using Bespoke.DynamicDnsUpdater.Client.DnsOMatic;
 using Bespoke.DynamicDnsUpdater.Tests.Base;
 using NUnit.Framework;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bespoke.DynamicDnsUpdater.Client
+namespace Bespoke.DynamicDnsUpdater.Client.DnsOMatic
 {
 	/// <summary>
 	/// The NativeUpdateStatusCodeAttribute.Value represents the string value that is

@@ -3,6 +3,7 @@ using System.Reflection;
 using System.ServiceProcess;
 using System.Threading;
 using Bespoke.DynamicDnsUpdater.Client;
+using Bespoke.DynamicDnsUpdater.Client.DnsOMatic;
 using Bespoke.DynamicDnsUpdater.Common;
 using log4net;
 

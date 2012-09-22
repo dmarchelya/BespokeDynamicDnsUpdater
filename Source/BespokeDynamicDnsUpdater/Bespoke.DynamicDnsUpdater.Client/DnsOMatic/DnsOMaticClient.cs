@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using log4net;
 
-namespace Bespoke.DynamicDnsUpdater.Client
+namespace Bespoke.DynamicDnsUpdater.Client.DnsOMatic
 {
 	//DNS-O-Matic API Reference
 	//https://www.dnsomatic.com/wiki/api
