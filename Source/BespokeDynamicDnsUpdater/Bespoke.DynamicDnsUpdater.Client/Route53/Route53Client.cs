@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using Amazon.Route53;
 using Amazon.Route53.Model;
+using Bespoke.DynamicDnsUpdater.Common;
 using log4net;
 
 namespace Bespoke.DynamicDnsUpdater.Client.Route53
@@ -30,6 +31,11 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 			client = new AmazonRoute53Client(awsAccessKeyId, awsSecretAccessKey);	
 		}
 
+		public Route53Client()
+			: this(Config.AwsAccessKeyId, Config.AwsSecretAccessKey)
+		{
+		}
+
 		/// <summary>
 		///
 		/// </summary>
@@ -44,7 +50,13 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 
 			try
 			{
-				var deleteRequest = GetChangeResourceRecordSetsRequest(hostname, ipAddress, ChangeActions.Delete, zones);
+				if(!LastUpdateIpAddresses.ContainsKey(hostname))
+				{
+					InitializeLastUpdateIpAddresses(hostname);
+				}
+
+				var lastIpAddress = LastUpdateIpAddresses[hostname];
+				var deleteRequest = GetChangeResourceRecordSetsRequest(hostname, lastIpAddress, ChangeActions.Delete, zones);
 				var deleteResponse = client.ChangeResourceRecordSets(deleteRequest);
 			}
 			//Ignore, if delete fails, its probably because the record didn't already exists
