@@ -11,6 +11,7 @@ namespace Bespoke.DynamicDnsUpdater.Tests.Route53
 	public class Route53ClientTests
 	{
 		[Test]
+		[Ignore("Manual Test")]
 		public void CanUpdateHostname()
 		{
 			const string awsAccessKeyId = @"";

@@ -8,6 +8,7 @@ namespace Bespoke.DynamicDnsUpdater.Tests
 	public class IpAddressResolverTests : BaseFixture
 	{
 		[Test]
+		[Ignore("Manual Test.  Only valid when run locally.")]
 		public void CanGetPublicIpAddressFromDynDns()
 		{
 			var resolver = new IpAddressResolver();
@@ -17,6 +18,7 @@ namespace Bespoke.DynamicDnsUpdater.Tests
 		}
 
 		[Test]
+		[Ignore("Manual Test.  Only valid when run locally.")]
 		public void CanGetPublicIpAddressFromDnsOMatic()
 		{
 			var resolver = new IpAddressResolver();
