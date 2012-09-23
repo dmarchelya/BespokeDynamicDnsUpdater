@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Bespoke.DynamicDnsUpdater.Common;
 using log4net;
 
 namespace Bespoke.DynamicDnsUpdater.Client
@@ -169,6 +170,11 @@ namespace Bespoke.DynamicDnsUpdater.Client
 					LastUpdateIpAddresses[hostname] = ipAddress;
 				}
 			}
+		}
+
+		public void InitializeLastUpdateIpAddresses()
+		{
+			InitializeLastUpdateIpAddresses(Config.HostnamesToUpdate);
 		}
 	
 		/// <summary>

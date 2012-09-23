@@ -51,11 +51,12 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Base\BaseFixture.cs" />
-    <Compile Include="DnsOMaticClientTests.cs" />
+    <Compile Include="BespokeUpdaterTests.cs" />
+    <Compile Include="DnsOMaticClient\DnsOMaticClientTests.cs" />
     <Compile Include="DomainNameFixture.cs" />
     <Compile Include="IpAddressResolverTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Route53\Route53ClientFixture.cs">
+    <Compile Include="Route53\Route53ClientTests.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

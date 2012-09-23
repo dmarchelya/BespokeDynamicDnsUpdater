@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Bespoke.DynamicDnsUpdater.Tests.Route53
 {
 	[TestFixture]
-	public class Route53ClientFixture
+	public class Route53ClientTests
 	{
 		[Test]
 		public void CanUpdateHostname()

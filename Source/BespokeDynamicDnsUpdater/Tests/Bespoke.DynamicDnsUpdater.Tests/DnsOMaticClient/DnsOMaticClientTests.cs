@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Bespoke.DynamicDnsUpdater.Client;
 using Bespoke.DynamicDnsUpdater.Client.DnsOMatic;
 using Bespoke.DynamicDnsUpdater.Tests.Base;
 using NUnit.Framework;
 
-namespace Bespoke.DynamicDnsUpdater.Tests
+namespace Bespoke.DynamicDnsUpdater.Tests.DnsOMaticClient
 {
 	[TestFixture]
 	public class DnsOMaticClientTests : BaseFixture
@@ -19,7 +18,7 @@ namespace Bespoke.DynamicDnsUpdater.Tests
 		[Ignore("Manual Test")]
 		public void CanUpdateDnsOMaticWithSpecifiedIp()
 		{
-			var client = new DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
+			var client = new Client.DnsOMatic.DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
 
 			bool updated = client.UpdateHostname(hostnameToUpdate, "192.168.1.1");
 
@@ -31,7 +30,7 @@ namespace Bespoke.DynamicDnsUpdater.Tests
 		[Ignore("Manual Test")]
 		public void CanUpdateDnsOMaticWithRetrievedIp()
 		{
-			var client = new DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
+			var client = new Client.DnsOMatic.DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
 
 			bool updated = client.UpdateHostname(hostnameToUpdate);
 
@@ -43,7 +42,7 @@ namespace Bespoke.DynamicDnsUpdater.Tests
 		[Ignore("Manual Test")]
 		public void CanUpdateMultipleHostnames()
 		{
-			var client = new DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
+			var client = new Client.DnsOMatic.DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
 
 			bool updated = client.UpdateHostnames(new List<string>() {hostnameToUpdate, hostnameToUpdate2});
 
@@ -59,7 +58,7 @@ namespace Bespoke.DynamicDnsUpdater.Tests
 		[Ignore("Manual Test")]
 		public void CanUpdateAllHostnamesWithSpecifiedIPAddress()
 		{
-			var client = new DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
+			var client = new Client.DnsOMatic.DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
 
 			bool updated = client.UpdateAll("192.168.1.1");
 
@@ -72,7 +71,7 @@ namespace Bespoke.DynamicDnsUpdater.Tests
 		[Ignore("Manual Test")]
 		public void CanUpdateAllHostnamesWithRetrievedIPAddress()
 		{
-			var client = new DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
+			var client = new Client.DnsOMatic.DnsOMaticClient(dnsOMaticUsername, dnsOMaticPassword);
 
 			bool updated = client.UpdateAll();
 

@@ -57,6 +57,7 @@
     <Compile Include="DnsRecordTypes.cs" />
     <Compile Include="DomainName.cs" />
     <Compile Include="DynamicDnsClientBase.cs" />
+    <Compile Include="DynamicDnsUpdaterClientType.cs" />
     <Compile Include="IpAddressResolver.cs" />
     <Compile Include="DnsOMatic\NativeUpdateStatusCodeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

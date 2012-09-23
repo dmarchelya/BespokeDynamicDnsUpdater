@@ -27,9 +27,8 @@ namespace Bespoke.DynamicDnsUpdater.Client.DnsOMatic
 		}
 
 		public DnsOMaticClient()
+			:this(Config.DnsOMaticUsername, Config.DnsOMaticPassword)
 		{
-			Username = Config.DnsOMaticUsername;
-			Password = Config.DnsOMaticPassword;
 		}
 
 		#endregion Constructor
