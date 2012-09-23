@@ -99,11 +99,7 @@ namespace Bespoke.DynamicDnsUpdater.Client.DnsOMatic
 		{
 			try
 			{
-				if(LastUpdateIpAddresses.ContainsKey(hostname)  && LastUpdateIpAddresses[hostname] == ipAddress)
-				{
-				    logger.Info(string.Format("No need to update hostname {0}, the IP Address ({1}) hasn't changed.", hostname, ipAddress));
-				    return true;
-				}
+				if (HasIpAddresssChanged(hostname, ipAddress) == false) return true; // No change, no need to update
 
 				var updateUriFormat = "https://updates.dnsomatic.com/nic/update?hostname={0}&myip={1}&wildcard=NOCHG&mx=NOCHG&backmx=NOCHG";
 
@@ -115,7 +111,7 @@ namespace Bespoke.DynamicDnsUpdater.Client.DnsOMatic
 				var product = (AssemblyProductAttribute)assembly.GetCustomAttributes(typeof(AssemblyProductAttribute), false)[0];
 				var version = assembly.GetName().Version;
 
-				request.UserAgent = string.Format("Open Source - {0} - {1}", product.Product, version);
+				request.UserAgent = string.Format("Bespoke Dynamic DNS Updater - {0} - {1}", product.Product, version);
 
 				var response = request.GetResponse();
 

@@ -34,8 +34,11 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 		///
 		/// </summary>
 		/// <param name="hostname">Fully qualified host name, i.e. host.domain.com</param>
+		/// <param name="ipAddress">The IP Address to update to.</param>
 		public override bool UpdateHostname(string hostname, string ipAddress)
-		{	
+		{
+			if (HasIpAddresssChanged(hostname, ipAddress) == false) return true; // No change, no need to update
+
 			var zonesResponse = client.ListHostedZones();
 			var zones = zonesResponse.ListHostedZonesResult.HostedZones;
 
@@ -63,7 +66,7 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 				//response.ChangeResourceRecordSetsResult.ChangeInfo.Status
 
 				//TODO: Interrogate response.
-
+				LastUpdateIpAddresses[hostname] = ipAddress;
 				return true;
 			}
 			catch (Exception ex)

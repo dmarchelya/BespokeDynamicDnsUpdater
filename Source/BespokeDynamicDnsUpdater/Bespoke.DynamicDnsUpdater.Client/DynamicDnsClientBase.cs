@@ -47,6 +47,10 @@ namespace Bespoke.DynamicDnsUpdater.Client
 
 		#endregion Properties
 
+		public abstract bool UpdateHostname(string hostname, string ipAddress);
+
+		#region Public Methods
+
 		/// <summary>
 		/// Updates the specified hostname via DNS-O-Matic with the public facing IP
 		/// Address for the system that the request is made from.
@@ -65,8 +69,6 @@ namespace Bespoke.DynamicDnsUpdater.Client
 
 			return UpdateHostname(hostname, ip);
 		}
-
-		public abstract bool UpdateHostname(string hostname, string ipAddress);
 
 		/// <summary>
 		/// Updates the given hostnames via DNS-O-Matic with the public facing
@@ -168,6 +170,26 @@ namespace Bespoke.DynamicDnsUpdater.Client
 				}
 			}
 		}
+	
+		/// <summary>
+		/// Checks if the given IP Address has changed from the last update.
+		/// </summary>
+		/// <param name="hostname">The hostname that we are checking for an update.</param>
+		/// <param name="ipAddress">The current IP Address.</param>
+		/// <returns>True, if the ip address has changed, otherwise false.</returns>
+		public bool HasIpAddresssChanged(string hostname, string ipAddress)
+		{
+			if (LastUpdateIpAddresses.ContainsKey(hostname) && LastUpdateIpAddresses[hostname] == ipAddress)
+			{
+				logger.Info(string.Format("No need to update hostname {0}, the IP Address ({1}) hasn't changed.", hostname, ipAddress));
+				return false;
+			}
+
+			return true;
+		}
+		
+		#endregion Public Methods
+
 		#region Helper Methods
 
 		/// <summary>
