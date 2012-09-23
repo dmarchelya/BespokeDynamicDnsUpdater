@@ -3,6 +3,7 @@ using System.Reflection;
 using System.ServiceProcess;
 using System.Threading;
 using Bespoke.DynamicDnsUpdater.Client;
+using Bespoke.DynamicDnsUpdater.Client.DnsOMatic;
 using Bespoke.DynamicDnsUpdater.Common;
 using log4net;
 
@@ -13,6 +14,7 @@ namespace Bespoke.DynamicDnsUpdater.WindowsService
 		private log4net.ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
 		private DnsOMaticClient dnsOMaticClient;
+		private BespokeUpdater updater;
 		private TimeSpan updateStartDelay = TimeSpan.FromSeconds(15);
 		private TimeSpan updateInterval = TimeSpan.FromMinutes(5);
 		private Timer timer = null;
@@ -54,7 +56,8 @@ namespace Bespoke.DynamicDnsUpdater.WindowsService
 				}
 
 				dnsOMaticClient = new DnsOMaticClient(username, password);
-			    dnsOMaticClient.InitializeLastUpdateIpAddresses(hostnamesToUpdate);
+				updater = new BespokeUpdater(dnsOMaticClient);
+			    updater.Client.InitializeLastUpdateIpAddresses(hostnamesToUpdate);
 
 				timer = new Timer(Update, null, updateStartDelay, updateInterval);
 			}
@@ -74,7 +77,7 @@ namespace Bespoke.DynamicDnsUpdater.WindowsService
 
 		private void Update(object data)
 		{
-			dnsOMaticClient.UpdateHostnames(hostnamesToUpdate);
+			updater.Client.UpdateHostnames(hostnamesToUpdate);
 		}
 	}
 }

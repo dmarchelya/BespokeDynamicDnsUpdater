@@ -1,6 +1,9 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using Bespoke.DynamicDnsUpdater;
 using Bespoke.DynamicDnsUpdater.Client;
+using Bespoke.DynamicDnsUpdater.Client.DnsOMatic;
+using Bespoke.DynamicDnsUpdater.Common;
 
 namespace BespokeDynamicDnsUpdater.ConsoleApp
 {
@@ -8,15 +11,14 @@ namespace BespokeDynamicDnsUpdater.ConsoleApp
 	{
 		static void Main(string[] args)
 		{
-			string username = ConfigurationManager.AppSettings["DnsOMaticUsername"];
-			string password = ConfigurationManager.AppSettings["DnsOMaticPassword"];
 			string hostnamesToUpdate = ConfigurationManager.AppSettings["HostNamesToUpdate"];
 
-			var request = new DnsOMaticClient(username, password);
+			var updater = new BespokeUpdater(Config.DynamicDnsUpdaterClientTypeId);
+			updater.Client.InitializeLastUpdateIpAddresses(hostnamesToUpdate);
 
-			request.UpdateHostnames(hostnamesToUpdate);
+			updater.Client.UpdateHostnames(hostnamesToUpdate);
 
-			//Console.ReadLine();
+			Console.ReadLine();
 		}
 	}
 }

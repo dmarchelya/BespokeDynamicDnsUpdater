@@ -51,9 +51,14 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Base\BaseFixture.cs" />
-    <Compile Include="DnsOMaticClientTests.cs" />
+    <Compile Include="BespokeUpdaterTests.cs" />
+    <Compile Include="DnsOMaticClient\DnsOMaticClientTests.cs" />
+    <Compile Include="DomainNameFixture.cs" />
     <Compile Include="IpAddressResolverTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Route53\Route53ClientTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -67,6 +72,7 @@
       <Name>Bespoke.DynamicDnsUpdater.Client</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

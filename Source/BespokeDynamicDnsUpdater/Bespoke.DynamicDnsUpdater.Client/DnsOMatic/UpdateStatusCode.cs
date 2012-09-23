@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Bespoke.DynamicDnsUpdater.Client
+namespace Bespoke.DynamicDnsUpdater.Client.DnsOMatic
 {
 	public enum UpdateStatusCode
 	{

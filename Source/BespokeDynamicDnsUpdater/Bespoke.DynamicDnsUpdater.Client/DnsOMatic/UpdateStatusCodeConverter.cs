@@ -1,4 +1,4 @@
-﻿namespace Bespoke.DynamicDnsUpdater.Client
+﻿namespace Bespoke.DynamicDnsUpdater.Client.DnsOMatic
 {
 	public static class UpdateStatusCodeConverter
 	{
