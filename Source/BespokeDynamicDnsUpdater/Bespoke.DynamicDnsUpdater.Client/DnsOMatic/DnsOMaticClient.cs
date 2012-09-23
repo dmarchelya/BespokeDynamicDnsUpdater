@@ -6,7 +6,7 @@ using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Bespoke.DynamicDnsUpdater.Common;
-using log4net;
+using NLog;
 
 namespace Bespoke.DynamicDnsUpdater.Client.DnsOMatic
 {
@@ -41,7 +41,7 @@ namespace Bespoke.DynamicDnsUpdater.Client.DnsOMatic
 
 		#region Fields
 
-		private log4net.ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+		private Logger logger = LogManager.GetCurrentClassLogger();
 		private Dictionary<string, UpdateStatusCode> updateStatusCodes = new Dictionary<string, UpdateStatusCode>();
 		private Dictionary<string, string> lastUpdatedIpAddresses = new Dictionary<string, string>();
 

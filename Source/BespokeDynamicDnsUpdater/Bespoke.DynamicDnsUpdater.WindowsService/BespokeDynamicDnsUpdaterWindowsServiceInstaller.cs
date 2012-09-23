@@ -4,15 +4,15 @@ using System.Reflection;
 using System.ServiceProcess;
 using System.ComponentModel;
 using System.Configuration.Install;
-using log4net;
 using System.Diagnostics;
+using NLog;
 
 namespace Bespoke.DynamicDnsUpdater.WindowsService
 {
 	[RunInstaller(true)]
 	public class BespokeDynamicDnsUpdaterWindowsServiceInstaller : Installer
 	{
-		private log4net.ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+		private Logger logger = LogManager.GetCurrentClassLogger();
 
 		private ServiceProcessInstaller processInstaller;
 		private ServiceInstaller serviceInstaller;

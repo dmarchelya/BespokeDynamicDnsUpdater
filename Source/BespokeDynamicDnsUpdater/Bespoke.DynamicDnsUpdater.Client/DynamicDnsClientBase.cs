@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Bespoke.DynamicDnsUpdater.Common;
-using log4net;
+using NLog;
 
 namespace Bespoke.DynamicDnsUpdater.Client
 {
@@ -12,7 +12,7 @@ namespace Bespoke.DynamicDnsUpdater.Client
 	{
 		#region Fields
 
-		private log4net.ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+		private Logger logger = LogManager.GetCurrentClassLogger();
 		private Dictionary<string, string> lastUpdatedIpAddresses = new Dictionary<string, string>();
 
 		#endregion Fields

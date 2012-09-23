@@ -5,13 +5,13 @@ using System.Threading;
 using Bespoke.DynamicDnsUpdater.Client;
 using Bespoke.DynamicDnsUpdater.Client.DnsOMatic;
 using Bespoke.DynamicDnsUpdater.Common;
-using log4net;
+using NLog;
 
 namespace Bespoke.DynamicDnsUpdater.WindowsService
 {
 	public class BespokeDynamicDnsUpdaterWindowsService : ServiceBase
 	{
-		private log4net.ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+		private Logger logger = LogManager.GetCurrentClassLogger();
 
 		private DnsOMaticClient dnsOMaticClient;
 		private BespokeUpdater updater;

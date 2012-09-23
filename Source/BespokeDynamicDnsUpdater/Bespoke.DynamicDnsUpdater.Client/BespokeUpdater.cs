@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Text;
 using Bespoke.DynamicDnsUpdater.Client.DnsOMatic;
 using Bespoke.DynamicDnsUpdater.Client.Route53;
-using log4net;
 
 namespace Bespoke.DynamicDnsUpdater.Client
 {

@@ -6,7 +6,7 @@ using System.Text;
 using Amazon.Route53;
 using Amazon.Route53.Model;
 using Bespoke.DynamicDnsUpdater.Common;
-using log4net;
+using NLog;
 
 namespace Bespoke.DynamicDnsUpdater.Client.Route53
 {
@@ -14,7 +14,7 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 	//http://docs.amazonwebservices.com/sdkfornet/latest/apidocs/Index.html
 	public class Route53Client : DynamicDnsClientBase
 	{
-		private log4net.ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+		private Logger logger = LogManager.GetCurrentClassLogger();
 
 		/// <summary>
 		/// http://docs.amazonwebservices.com/sdkfornet/latest/apidocs/?topic=html/P_Amazon_Route53_Model_Change_Action.htm
