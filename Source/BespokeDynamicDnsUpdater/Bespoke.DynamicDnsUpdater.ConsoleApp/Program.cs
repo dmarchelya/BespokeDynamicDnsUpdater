@@ -14,6 +14,7 @@ namespace BespokeDynamicDnsUpdater.ConsoleApp
 			string hostnamesToUpdate = ConfigurationManager.AppSettings["HostNamesToUpdate"];
 
 			var updater = new BespokeUpdater(Config.DynamicDnsUpdaterClientTypeId);
+			updater.Client.InitializeLastUpdateIpAddresses(hostnamesToUpdate);
 
 			updater.Client.UpdateHostnames(hostnamesToUpdate);
 
