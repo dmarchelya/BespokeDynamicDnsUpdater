@@ -10,6 +10,8 @@ using log4net;
 
 namespace Bespoke.DynamicDnsUpdater.Client.Route53
 {
+	//API Reference
+	//http://docs.amazonwebservices.com/sdkfornet/latest/apidocs/Index.html
 	public class Route53Client : DynamicDnsClientBase
 	{
 		private log4net.ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -17,11 +19,13 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 		/// <summary>
 		/// http://docs.amazonwebservices.com/sdkfornet/latest/apidocs/?topic=html/P_Amazon_Route53_Model_Change_Action.htm
 		/// </summary>
-		public class ChangeActions
+		public enum ChangeActionType
 		{
-			//TODO: Convert to enum
-			public const string Create = "CREATE";
-			public const string Delete = "DELETE";
+			[StringValue("CREATE")]
+			Create = 1,
+
+			[StringValue("DELETE")]
+			Delete = 2
 		}
 
 		private AmazonRoute53Client client;
@@ -56,7 +60,7 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 				}
 
 				var lastIpAddress = LastUpdateIpAddresses[hostname];
-				var deleteRequest = GetChangeResourceRecordSetsRequest(hostname, lastIpAddress, ChangeActions.Delete, zones);
+				var deleteRequest = GetChangeResourceRecordSetsRequest(hostname, lastIpAddress, EnumerationUtility.GetStringValue(ChangeActionType.Delete), zones);
 				var deleteResponse = client.ChangeResourceRecordSets(deleteRequest);
 			}
 			//Ignore, if delete fails, its probably because the record didn't already exists
@@ -71,13 +75,12 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 
 			try
 			{
-				var createRequest = GetChangeResourceRecordSetsRequest(hostname, ipAddress, ChangeActions.Create, zones);
+				var createRequest = GetChangeResourceRecordSetsRequest(hostname, ipAddress, EnumerationUtility.GetStringValue(ChangeActionType.Create), zones);
 				var createResponse = client.ChangeResourceRecordSets(createRequest);
 
 				//ChangeInfo info: http://docs.amazonwebservices.com/sdkfornet/latest/apidocs/?topic=html/T_Amazon_Route53_Model_ChangeInfo.htm
 				//response.ChangeResourceRecordSetsResult.ChangeInfo.Status
 
-				//TODO: Interrogate response.
 				LastUpdateIpAddresses[hostname] = ipAddress;
 				return true;
 			}
