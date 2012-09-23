@@ -9,7 +9,7 @@ using log4net;
 
 namespace Bespoke.DynamicDnsUpdater.Client.Route53
 {
-	public class Route53Client
+	public class Route53Client : DynamicDnsClientBase
 	{
 		private log4net.ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -34,7 +34,7 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 		///
 		/// </summary>
 		/// <param name="hostname">Fully qualified host name, i.e. host.domain.com</param>
-		public void UpdateHostName(string hostname, string ipAddress)
+		public override bool UpdateHostname(string hostname, string ipAddress)
 		{	
 			var zonesResponse = client.ListHostedZones();
 			var zones = zonesResponse.ListHostedZonesResult.HostedZones;
@@ -44,9 +44,9 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 				var deleteRequest = GetChangeResourceRecordSetsRequest(hostname, ipAddress, ChangeActions.Delete, zones);
 				var deleteResponse = client.ChangeResourceRecordSets(deleteRequest);
 			}
+			//Ignore, if delete fails, its probably because the record didn't already exists
 			catch (AmazonRoute53Exception ex)
 			{
-				//Ignore, if delete fails, its probably because the record didn't already exists
 				logger.Warn(ex);
 			}
 			catch(Exception ex)
@@ -54,13 +54,23 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 				logger.Error(ex);
 			}
 
-			var createRequest = GetChangeResourceRecordSetsRequest(hostname, ipAddress, ChangeActions.Create, zones);
-			var createResponse = client.ChangeResourceRecordSets(createRequest);
+			try
+			{
+				var createRequest = GetChangeResourceRecordSetsRequest(hostname, ipAddress, ChangeActions.Create, zones);
+				var createResponse = client.ChangeResourceRecordSets(createRequest);
 
-			//ChangeInfo info: http://docs.amazonwebservices.com/sdkfornet/latest/apidocs/?topic=html/T_Amazon_Route53_Model_ChangeInfo.htm
-			//response.ChangeResourceRecordSetsResult.ChangeInfo.Status
+				//ChangeInfo info: http://docs.amazonwebservices.com/sdkfornet/latest/apidocs/?topic=html/T_Amazon_Route53_Model_ChangeInfo.htm
+				//response.ChangeResourceRecordSetsResult.ChangeInfo.Status
 
-			//TODO: Interrogate response.
+				//TODO: Interrogate response.
+
+				return true;
+			}
+			catch (Exception ex)
+			{
+				logger.Error(ex);
+				return false;
+			}
 		}
 
 		private ChangeResourceRecordSetsRequest GetChangeResourceRecordSetsRequest(string hostname, string ipAddress, string action, List<HostedZone> zones)

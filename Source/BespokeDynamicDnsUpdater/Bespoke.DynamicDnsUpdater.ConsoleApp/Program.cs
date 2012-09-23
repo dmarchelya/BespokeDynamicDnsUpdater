@@ -13,9 +13,10 @@ namespace BespokeDynamicDnsUpdater.ConsoleApp
 			string password = ConfigurationManager.AppSettings["DnsOMaticPassword"];
 			string hostnamesToUpdate = ConfigurationManager.AppSettings["HostNamesToUpdate"];
 
-			var request = new DnsOMaticClient(username, password);
+			var client = new DnsOMaticClient(username, password);
+			var updater = new BespokeUpdater(client);
 
-			request.UpdateHostnames(hostnamesToUpdate);
+			updater.Client.UpdateHostnames(hostnamesToUpdate);
 
 			//Console.ReadLine();
 		}

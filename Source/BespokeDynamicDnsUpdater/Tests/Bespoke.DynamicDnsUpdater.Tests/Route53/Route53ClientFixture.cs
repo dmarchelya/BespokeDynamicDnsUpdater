@@ -17,7 +17,7 @@ namespace Bespoke.DynamicDnsUpdater.Tests.Route53
 			const string awsSecretAccessKey = @"";
 			var client = new Route53Client(awsAccessKeyId, awsSecretAccessKey);
 
-			client.UpdateHostName("ddnsupdater.bespokeindustries.com", "127.0.0.1");
+			client.UpdateHostname("ddnsupdater.bespokeindustries.com", "127.0.0.1");
 		}
 	}
 }
