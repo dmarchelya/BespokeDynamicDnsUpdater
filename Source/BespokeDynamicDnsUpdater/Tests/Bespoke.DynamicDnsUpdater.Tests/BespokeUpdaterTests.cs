@@ -28,5 +28,14 @@ namespace Bespoke.DynamicDnsUpdater.Tests
 
 			Assert.AreEqual(typeof(Route53Client), client.GetType());
 		}
+
+		[Test]
+		public void CanGetDnsimpleClientFromId()
+		{
+			const int id = 3;
+			var client = BespokeUpdater.GetClient(id);
+
+			Assert.AreEqual(typeof(Client.Dnsimple.DnsimpleClient), client.GetType());
+		}
 	}
 }

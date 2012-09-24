@@ -37,5 +37,15 @@ namespace Bespoke.DynamicDnsUpdater.Common
 		{
 			get { return ConfigurationManager.AppSettings["AwsSecretAccessKey"]; }
 		}
+
+		public static string DnsimpleUsername
+		{
+			get { return ConfigurationManager.AppSettings["DnsimpleUsername"]; }
+		}
+
+		public static string DnsimplePassword
+		{
+			get { return ConfigurationManager.AppSettings["DnsimplePassword"]; }
+		}
 	}
 }

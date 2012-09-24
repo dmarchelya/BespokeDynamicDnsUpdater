@@ -33,6 +33,9 @@ namespace Bespoke.DynamicDnsUpdater.WindowsService
 
 		protected override void OnStart(string[] args)
 		{
+		
+			Thread.Sleep(10000);
+
 			try
 			{
 				hostnamesToUpdate = Config.HostnamesToUpdate;

@@ -8,6 +8,7 @@ namespace Bespoke.DynamicDnsUpdater.Client
 	public enum DynamicDnsUpdaterClientType
 	{
 		DnsOMatic = 1,
-		Route53 = 2
+		Route53 = 2,
+		Dnsimple = 3
 	}
 }

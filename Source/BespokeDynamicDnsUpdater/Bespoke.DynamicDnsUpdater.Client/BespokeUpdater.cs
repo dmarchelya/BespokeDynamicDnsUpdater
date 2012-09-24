@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Bespoke.DynamicDnsUpdater.Client.DnsOMatic;
+using Bespoke.DynamicDnsUpdater.Client.Dnsimple;
 using Bespoke.DynamicDnsUpdater.Client.Route53;
 
 namespace Bespoke.DynamicDnsUpdater.Client
@@ -35,10 +36,15 @@ namespace Bespoke.DynamicDnsUpdater.Client
 		/// <returns>The dynamic dns Client.</returns>
 		public static DynamicDnsClientBase GetClient(DynamicDnsUpdaterClientType clientType)
 		{
-			if(clientType == DynamicDnsUpdaterClientType.Route53)
-				return new Route53Client();
-			else
-				return new DnsOMaticClient();
+			switch(clientType)
+			{
+				case DynamicDnsUpdaterClientType.Route53:
+					return new Route53Client();
+				case DynamicDnsUpdaterClientType.Dnsimple:
+					return new DnsimpleClient();
+				default: 
+					return new DnsOMaticClient();
+			}
 		}
 
 		public static DynamicDnsClientBase GetClient(int clientTypeId)
