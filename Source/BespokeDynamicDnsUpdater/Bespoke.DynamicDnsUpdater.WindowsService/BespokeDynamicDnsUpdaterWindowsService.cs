@@ -13,7 +13,6 @@ namespace Bespoke.DynamicDnsUpdater.WindowsService
 	{
 		private Logger logger = LogManager.GetCurrentClassLogger();
 
-		private DnsOMaticClient dnsOMaticClient;
 		private BespokeUpdater updater;
 		private TimeSpan updateStartDelay = TimeSpan.FromSeconds(15);
 		private TimeSpan updateInterval = TimeSpan.FromMinutes(5);
@@ -36,27 +35,30 @@ namespace Bespoke.DynamicDnsUpdater.WindowsService
 		{
 			try
 			{
-				username = Config.DnsOMaticUsername;
-				password = Config.DnsOMaticPassword;
 				hostnamesToUpdate = Config.HostnamesToUpdate;
-
-				if (string.IsNullOrEmpty(username))
-				{
-					throw new ArgumentException("Username was not provided");
-				}
-
-				if (string.IsNullOrEmpty(password))
-				{
-					throw new ArgumentException("Password was not provided");
-				}
 
 				if (string.IsNullOrEmpty(hostnamesToUpdate))
 				{
 					throw new ArgumentException("Hostnames To Update were not provided");
+				}	
+
+				if(Config.DynamicDnsUpdaterClientTypeId == (int)DynamicDnsUpdaterClientType.DnsOMatic)
+				{
+					username = Config.DnsOMaticUsername;
+					password = Config.DnsOMaticPassword;
+
+					if (string.IsNullOrEmpty(username))
+					{
+						throw new ArgumentException("Username was not provided");
+					}
+
+					if (string.IsNullOrEmpty(password))
+					{
+						throw new ArgumentException("Password was not provided");
+					}
 				}
 
-				dnsOMaticClient = new DnsOMaticClient(username, password);
-				updater = new BespokeUpdater(dnsOMaticClient);
+				updater = new BespokeUpdater(Config.DynamicDnsUpdaterClientTypeId);
 			    updater.Client.InitializeLastUpdateIpAddresses(hostnamesToUpdate);
 
 				timer = new Timer(Update, null, updateStartDelay, updateInterval);
