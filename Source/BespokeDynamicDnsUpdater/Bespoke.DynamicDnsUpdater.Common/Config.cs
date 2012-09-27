@@ -7,7 +7,10 @@ namespace Bespoke.DynamicDnsUpdater.Common
 	{
 		public static int DynamicDnsUpdaterClientTypeId
 		{
-			get { return Convert.ToInt32(ConfigurationManager.AppSettings["DynamicDnsUpdaterClientTypeId"]); }
+			get
+			{
+				return StringUtility.ConvertToInt(ConfigurationManager.AppSettings["DynamicDnsUpdaterClientTypeId"], 1);
+			}
 		}
 
 		public static string DnsOMaticUsername
@@ -37,5 +40,7 @@ namespace Bespoke.DynamicDnsUpdater.Common
 		{
 			get { return ConfigurationManager.AppSettings["AwsSecretAccessKey"]; }
 		}
+
+		
 	}
 }

@@ -44,6 +44,7 @@
     <Compile Include="Encode.cs" />
     <Compile Include="EncryptionService.cs" />
     <Compile Include="EnumerationUtility.cs" />
+    <Compile Include="StringUtility.cs" />
     <Compile Include="StringValueAttribute.cs" />
     <Content Include="..\SolutionItems\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
