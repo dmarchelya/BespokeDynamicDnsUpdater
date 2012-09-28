@@ -16,7 +16,9 @@ namespace BespokeDynamicDnsUpdater.ConsoleApp
 		{
 			//Thread.Sleep(10000);
 
-			if (args.First() == "-config")
+			string firstArg = args.FirstOrDefault();
+
+			if (firstArg != null && firstArg == "-config")
 			{
 				UpdateConfigSettings(args);
 				Console.ReadLine();
@@ -109,13 +111,25 @@ namespace BespokeDynamicDnsUpdater.ConsoleApp
 						config.AppSettings.Settings.Remove("DnsOMaticPassword");
 						config.AppSettings.Settings.Add("DnsOMaticPassword", password);
 					}
-
 					break;
 				case DynamicDnsUpdaterClientType.Route53:
 					break;
 				case DynamicDnsUpdaterClientType.Dnsimple:
+					if (!string.IsNullOrWhiteSpace(username))
+					{
+						config.AppSettings.Settings.Remove("DnsimpleUsername");
+						config.AppSettings.Settings.Add("DnsimpleUsername", username);
+					}
+					if (!string.IsNullOrWhiteSpace(password))
+					{
+						config.AppSettings.Settings.Remove("DnsimplePassword");
+						config.AppSettings.Settings.Add("DnsimplePassword", password);
+					}
 					break;
 			}
+
+			config.AppSettings.Settings.Remove("DynamicDnsUpdaterClientTypeId");
+			config.AppSettings.Settings.Add("DynamicDnsUpdaterClientTypeId", clientTypeIdString);
 
 			if (!string.IsNullOrWhiteSpace(hostnames))
 			{
