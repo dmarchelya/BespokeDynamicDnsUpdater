@@ -18,7 +18,7 @@ namespace BespokeDynamicDnsUpdater.ConsoleApp
 
 			updater.Client.UpdateHostnames(hostnamesToUpdate);
 
-			//Console.ReadLine();
+			Console.ReadLine();
 		}
 	}
 }
