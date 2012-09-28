@@ -48,6 +48,7 @@ namespace Bespoke.DynamicDnsUpdater.Client.Dnsimple
 							else
 							{
 								client.UpdateRecord(domainName.Domain, records[i].record.id, hostForRecord, ipAddress);
+								logger.Info(string.Format("Updated DNS Record: {0} to IP Address: {1}", hostname, ipAddress));
 								return true;
 							}
 						}
