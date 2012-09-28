@@ -5,6 +5,7 @@ using System.ServiceProcess;
 using System.ComponentModel;
 using System.Configuration.Install;
 using System.Diagnostics;
+using Bespoke.DynamicDnsUpdater.Common;
 using NLog;
 
 namespace Bespoke.DynamicDnsUpdater.WindowsService
@@ -46,7 +47,6 @@ namespace Bespoke.DynamicDnsUpdater.WindowsService
 			if (!string.IsNullOrWhiteSpace(Context.Parameters["TargetDir"]))
 			{
 				string targetDir = Context.Parameters["TargetDir"];
-				logger.Error(targetDir);
 				const string applicationName = "Bespoke.DynamicDnsUpdater.WindowsService.exe";
 				var exePath = System.IO.Path.Combine(targetDir, applicationName);
 
@@ -63,8 +63,22 @@ namespace Bespoke.DynamicDnsUpdater.WindowsService
 
 				if (!string.IsNullOrWhiteSpace(Context.Parameters["Password"]))
 				{
+					bool encryptionEnabled = Convert.ToBoolean(config.AppSettings.Settings["EncryptionEnabled"].Value);
+
+					string password = string.Empty;
+
+					if(encryptionEnabled)
+					{
+						var encryptionService = new EncryptionService(Convert.FromBase64String(Common.Constants.EncryptionKey), Convert.FromBase64String(Common.Constants.InitializationVector));
+						password = encryptionService.EncryptToBase64String(Context.Parameters["Password"]);
+					}
+					else
+					{
+						password = Context.Parameters["Password"];
+					}
+					
 					config.AppSettings.Settings.Remove("DnsOMaticPassword");
-					config.AppSettings.Settings.Add("DnsOMaticPassword", Context.Parameters["Password"]);
+					config.AppSettings.Settings.Add("DnsOMaticPassword", password);
 				}
 
 				if (!string.IsNullOrWhiteSpace(Context.Parameters["Hostnames"]))

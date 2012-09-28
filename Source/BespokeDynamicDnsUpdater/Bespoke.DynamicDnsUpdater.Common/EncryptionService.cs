@@ -64,7 +64,11 @@ namespace Bespoke.DynamicDnsUpdater.Common
 			get { return new AesCryptoServiceProvider(); }
 		}
 
-		public Encoding Encoding { get; set; }
+		public Encoding Encoding 
+		{
+			get { return Encode.Encoding; }
+			set { Encode.Encoding = value; }
+		}
 
 		public static Encoding DefaultEncoding { get { return Encode.DefaultEncoding; } }
 
@@ -78,6 +82,16 @@ namespace Bespoke.DynamicDnsUpdater.Common
 		{
 			get { return EncryptionAlgorithm.IV; }
 			set { EncryptionAlgorithm.IV = value; }
+		}
+
+		public string KeyBase64
+		{
+			get { return Encode.ToBase64String(Key); }
+		}
+
+		public string InitializationVectorBase64
+		{
+			get{return Encode.ToBase64String(InitializationVector);}
 		}
 
 		#endregion Public Properties

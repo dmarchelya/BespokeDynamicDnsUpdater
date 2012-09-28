@@ -42,6 +42,8 @@ namespace Bespoke.DynamicDnsUpdater.WindowsService
 					throw new ArgumentException("Hostnames To Update were not provided");
 				}	
 
+				logger.Info(string.Format("DynamicDnsUpdaterClientTypeId: {0}", Config.DynamicDnsUpdaterClientTypeId));
+
 				if(Config.DynamicDnsUpdaterClientTypeId == (int)DynamicDnsUpdaterClientType.DnsOMatic)
 				{
 					username = Config.DnsOMaticUsername;
