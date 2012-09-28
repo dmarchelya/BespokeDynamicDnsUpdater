@@ -82,6 +82,9 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 				//response.ChangeResourceRecordSetsResult.ChangeInfo.Status
 
 				LastUpdateIpAddresses[hostname] = ipAddress;
+
+				logger.Info(string.Format("Updated DNS Record: {0} to IP Address: {1}", hostname, ipAddress));
+
 				return true;
 			}
 			catch (Exception ex)

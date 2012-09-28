@@ -66,6 +66,7 @@ namespace Bespoke.DynamicDnsUpdater.Client.Dnsimple
 								}
 								else
 								{
+									LastUpdateIpAddresses[hostname] = ipAddress;
 									logger.Info(string.Format("Updated DNS Record: {0} to IP Address: {1}", hostname, ipAddress));
 									return true;			
 								}
@@ -78,6 +79,8 @@ namespace Bespoke.DynamicDnsUpdater.Client.Dnsimple
 				//so we will try to create one.
 
 				client.AddRecord(domainName.Domain, domainName.Host, DnsRecordType.A, ipAddress);
+				LastUpdateIpAddresses[hostname] = ipAddress;
+
 				return true;
 			}
 			catch (Exception ex)

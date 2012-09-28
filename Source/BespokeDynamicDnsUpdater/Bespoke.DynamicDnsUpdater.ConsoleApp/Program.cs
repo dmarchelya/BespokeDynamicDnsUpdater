@@ -36,6 +36,8 @@ namespace BespokeDynamicDnsUpdater.ConsoleApp
 			string password = string.Empty;
 			string hostnames = string.Empty;
 			string encryptionEnabled = string.Empty;
+			string secretAccessKeyId = string.Empty;
+			string secretAccessKey = string.Empty;
 
 			foreach(var arg in args)
 			{
@@ -61,6 +63,14 @@ namespace BespokeDynamicDnsUpdater.ConsoleApp
 				else if(param.ToLower().StartsWith("/encryptionenabled:"))
 				{
 					encryptionEnabled = param.Substring(19, param.Length - 19);
+				}
+				else if(param.ToLower().StartsWith("/secretaccesskeyid:"))
+				{
+					secretAccessKeyId = param.Substring(19, param.Length - 19);
+				}
+				else if(param.ToLower().StartsWith("/secretaccesskey:"))
+				{
+					secretAccessKey = param.Substring(17, param.Length - 17);
 				}
 			}
 
@@ -95,6 +105,12 @@ namespace BespokeDynamicDnsUpdater.ConsoleApp
 				password = encryptionService.EncryptToBase64String(password);
 			}
 
+			if(!string.IsNullOrWhiteSpace(secretAccessKey) && encryptionEnabled == "true")
+			{
+				var encryptionService = new EncryptionService(Convert.FromBase64String(Bespoke.DynamicDnsUpdater.Common.Constants.EncryptionKey), Convert.FromBase64String(Bespoke.DynamicDnsUpdater.Common.Constants.InitializationVector));
+				secretAccessKey = encryptionService.EncryptToBase64String(secretAccessKey);
+			}
+
 			var pathToApp = System.Reflection.Assembly.GetExecutingAssembly().Location;
 			var config = ConfigurationManager.OpenExeConfiguration(pathToApp);
 
@@ -113,6 +129,16 @@ namespace BespokeDynamicDnsUpdater.ConsoleApp
 					}
 					break;
 				case DynamicDnsUpdaterClientType.Route53:
+					if(!string.IsNullOrWhiteSpace(secretAccessKeyId))
+					{
+						config.AppSettings.Settings.Remove("AwsAccessKeyId");
+						config.AppSettings.Settings.Add("AwsAccessKeyId", secretAccessKeyId);
+					}
+					if(!string.IsNullOrWhiteSpace(secretAccessKey))
+					{
+						config.AppSettings.Settings.Remove("AwsSecretAccessKey");
+						config.AppSettings.Settings.Add("AwsSecretAccessKey", secretAccessKey);
+					}
 					break;
 				case DynamicDnsUpdaterClientType.Dnsimple:
 					if (!string.IsNullOrWhiteSpace(username))
