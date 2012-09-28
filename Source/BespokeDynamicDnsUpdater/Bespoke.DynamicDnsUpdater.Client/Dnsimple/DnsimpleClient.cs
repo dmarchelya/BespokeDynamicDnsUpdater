@@ -1,8 +1,10 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using Bespoke.DynamicDnsUpdater.Common;
 using DNSimple;
 using NLog;
+using RestSharp;
 
 namespace Bespoke.DynamicDnsUpdater.Client.Dnsimple
 {
@@ -29,7 +31,14 @@ namespace Bespoke.DynamicDnsUpdater.Client.Dnsimple
 
 				var domainName = DomainName.Parse(hostname);
 
-				var records = client.ListRecords(domainName.Domain);
+				dynamic records = client.ListRecords(domainName.Domain);
+
+				var recordsResponse = records as IDictionary<String, object>;
+				if (recordsResponse != null && recordsResponse.ContainsKey("error"))
+				{
+					logger.Error(records.error);
+					return false;
+				}
 
 				if (records != null)
 				{
@@ -47,9 +56,19 @@ namespace Bespoke.DynamicDnsUpdater.Client.Dnsimple
 							}
 							else
 							{
-								client.UpdateRecord(domainName.Domain, records[i].record.id, hostForRecord, ipAddress);
-								logger.Info(string.Format("Updated DNS Record: {0} to IP Address: {1}", hostname, ipAddress));
-								return true;
+								dynamic record = client.UpdateRecord(domainName.Domain, records[i].record.id, hostForRecord, ipAddress);
+
+								var recordResponse = record as IDictionary<String, object>;
+								if (recordResponse != null && recordResponse.ContainsKey("error"))
+								{
+									logger.Error(record.error);
+									return false;
+								}
+								else
+								{
+									logger.Info(string.Format("Updated DNS Record: {0} to IP Address: {1}", hostname, ipAddress));
+									return true;			
+								}
 							}
 						}
 					}

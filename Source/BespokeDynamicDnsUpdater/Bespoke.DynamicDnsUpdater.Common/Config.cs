@@ -94,7 +94,27 @@ namespace Bespoke.DynamicDnsUpdater.Common
 
 		public static string DnsimplePassword
 		{
-			get { return ConfigurationManager.AppSettings["DnsimplePassword"]; }
+			get
+			{
+				if (EncryptionEnabled)
+				{
+					try
+					{
+						var encryptionService = new EncryptionService(Convert.FromBase64String(Constants.EncryptionKey), Convert.FromBase64String(Constants.InitializationVector));
+						return encryptionService.DecryptBase64StringToString(ConfigurationManager.AppSettings["DnsimplePassword"]);
+						//return ConfigurationManager.AppSettings["DnsimplePassword"];
+					}
+					catch (Exception ex)
+					{
+						logger.Error(ex);
+						return null;
+					}
+				}
+				else
+				{
+					return ConfigurationManager.AppSettings["DnsimplePassword"];
+				}
+			}
 		}
 	}
 }
