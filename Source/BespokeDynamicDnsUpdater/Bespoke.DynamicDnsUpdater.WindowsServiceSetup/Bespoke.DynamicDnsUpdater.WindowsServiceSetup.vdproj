@@ -21,26 +21,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0A3504BB074F9B4981335C7492502897"
+        "MsmKey" = "8:_3351BD770366691CB7A1810558A38ECE"
+        "OwnerKey" = "8:_79FAD47C01A7644D9EEF444108EC202D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3351BD770366691CB7A1810558A38ECE"
         "OwnerKey" = "8:_8324274E9D964F20A4B4157A9A5C214E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_0F4E92022A30996AEF46636B95F23D56"
+        "MsmKey" = "8:_79FAD47C01A7644D9EEF444108EC202D"
         "OwnerKey" = "8:_8324274E9D964F20A4B4157A9A5C214E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7609DA7E39C838FFEDF2A526E8370E47"
-        "OwnerKey" = "8:_8324274E9D964F20A4B4157A9A5C214E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7609DA7E39C838FFEDF2A526E8370E47"
-        "OwnerKey" = "8:_0A3504BB074F9B4981335C7492502897"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -51,6 +45,36 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_96E4A39B87FEA5E1FF0DB79415DC1E5E"
+        "OwnerKey" = "8:_3351BD770366691CB7A1810558A38ECE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_96E4A39B87FEA5E1FF0DB79415DC1E5E"
+        "OwnerKey" = "8:_8324274E9D964F20A4B4157A9A5C214E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_96E4A39B87FEA5E1FF0DB79415DC1E5E"
+        "OwnerKey" = "8:_79FAD47C01A7644D9EEF444108EC202D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BCAE7CF102586D245E2A2742B2F786C0"
+        "OwnerKey" = "8:_8324274E9D964F20A4B4157A9A5C214E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BCAE7CF102586D245E2A2742B2F786C0"
+        "OwnerKey" = "8:_79FAD47C01A7644D9EEF444108EC202D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_8324274E9D964F20A4B4157A9A5C214E"
         "MsmSig" = "8:_UNDEFINED"
@@ -58,19 +82,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0F4E92022A30996AEF46636B95F23D56"
+        "OwnerKey" = "8:_BCAE7CF102586D245E2A2742B2F786C0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0A3504BB074F9B4981335C7492502897"
+        "OwnerKey" = "8:_79FAD47C01A7644D9EEF444108EC202D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7609DA7E39C838FFEDF2A526E8370E47"
+        "OwnerKey" = "8:_3351BD770366691CB7A1810558A38ECE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_96E4A39B87FEA5E1FF0DB79415DC1E5E"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -233,11 +263,6 @@
             "AssemblyAsmDisplayName" = "8:Bespoke.DynamicDnsUpdater.Client, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_0A3504BB074F9B4981335C7492502897"
-                    {
-                    "Name" = "8:Bespoke.DynamicDnsUpdater.Client.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Bespoke.DynamicDnsUpdater.Client.dll"
             "TargetName" = "8:"
@@ -264,7 +289,33 @@
             "AssemblyAsmDisplayName" = "8:Bespoke.DynamicDnsUpdater.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_0F4E92022A30996AEF46636B95F23D56"
+                }
+            "SourcePath" = "8:Bespoke.DynamicDnsUpdater.Common.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_47B9136041BF4C4885C5845E908862AF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3351BD770366691CB7A1810558A38ECE"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Bespoke.DynamicDnsUpdater.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_3351BD770366691CB7A1810558A38ECE"
                     {
                     "Name" = "8:Bespoke.DynamicDnsUpdater.Common.dll"
                     "Attributes" = "3:512"
@@ -295,13 +346,101 @@
             "AssemblyAsmDisplayName" = "8:log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_7609DA7E39C838FFEDF2A526E8370E47"
+                }
+            "SourcePath" = "8:log4net.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_47B9136041BF4C4885C5845E908862AF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_79FAD47C01A7644D9EEF444108EC202D"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Bespoke.DynamicDnsUpdater.Client, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_79FAD47C01A7644D9EEF444108EC202D"
                     {
-                    "Name" = "8:log4net.dll"
+                    "Name" = "8:Bespoke.DynamicDnsUpdater.Client.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:log4net.dll"
+            "SourcePath" = "8:Bespoke.DynamicDnsUpdater.Client.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_47B9136041BF4C4885C5845E908862AF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_96E4A39B87FEA5E1FF0DB79415DC1E5E"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_96E4A39B87FEA5E1FF0DB79415DC1E5E"
+                    {
+                    "Name" = "8:NLog.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:NLog.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_47B9136041BF4C4885C5845E908862AF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BCAE7CF102586D245E2A2742B2F786C0"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:AWSSDK, Version=1.5.4.1, Culture=neutral, PublicKeyToken=cd2d24cd2bace800, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_BCAE7CF102586D245E2A2742B2F786C0"
+                    {
+                    "Name" = "8:AWSSDK.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:AWSSDK.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_47B9136041BF4C4885C5845E908862AF"
@@ -1153,7 +1292,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8324274E9D964F20A4B4157A9A5C214E"
             {
-            "SourcePath" = "8:..\\Bespoke.DynamicDnsUpdater.WindowsService\\obj\\x86\\Release\\Bespoke.DynamicDnsUpdater.WindowsService.exe"
+            "SourcePath" = "8:..\\Bespoke.DynamicDnsUpdater.WindowsService\\obj\\x86\\Debug\\Bespoke.DynamicDnsUpdater.WindowsService.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_47B9136041BF4C4885C5845E908862AF"
@@ -1173,6 +1312,34 @@
             "ProjectOutputGroupRegister" = "3:1"
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{552D5665-56FA-4644-BC0E-1FCD64929FA3}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D202AAF303174C108C8916A52EC487FB"
+            {
+            "SourcePath" = "8:"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_47B9136041BF4C4885C5845E908862AF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:ContentFiles"
             "OutputProjectGuid" = "8:{552D5665-56FA-4644-BC0E-1FCD64929FA3}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
