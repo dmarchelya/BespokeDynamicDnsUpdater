@@ -102,7 +102,7 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 			                	{
 			                		Name = hostname,
 			                		TTL = 300, //5 min.
-			                		Type = DnsRecordTypes.A,
+			                		Type = DnsRecordType.A,
 			                		ResourceRecords = new List<ResourceRecord> {record}
 			                	};
 

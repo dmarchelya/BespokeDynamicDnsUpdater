@@ -86,5 +86,15 @@ namespace Bespoke.DynamicDnsUpdater.Common
 				}
 			}
 		}
+
+		public static string DnsimpleUsername
+		{
+			get { return ConfigurationManager.AppSettings["DnsimpleUsername"]; }
+		}
+
+		public static string DnsimplePassword
+		{
+			get { return ConfigurationManager.AppSettings["DnsimplePassword"]; }
+		}
 	}
 }

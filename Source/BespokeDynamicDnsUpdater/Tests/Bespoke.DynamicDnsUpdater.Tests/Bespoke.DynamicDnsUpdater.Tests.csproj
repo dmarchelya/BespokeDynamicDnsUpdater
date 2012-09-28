@@ -52,6 +52,7 @@
     </Compile>
     <Compile Include="Base\BaseFixture.cs" />
     <Compile Include="BespokeUpdaterTests.cs" />
+    <Compile Include="DnsimpleClient\DnsimpleClientTests.cs" />
     <Compile Include="DnsOMaticClient\DnsOMaticClientTests.cs" />
     <Compile Include="DomainNameFixture.cs" />
     <Compile Include="IpAddressResolverTests.cs" />

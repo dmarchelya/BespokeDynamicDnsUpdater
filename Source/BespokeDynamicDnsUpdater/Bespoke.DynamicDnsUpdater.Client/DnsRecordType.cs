@@ -6,7 +6,7 @@ using System.Text;
 namespace Bespoke.DynamicDnsUpdater.Client
 {
 	//TODO: Implement as enum
-	public static class DnsRecordTypes
+	public static class DnsRecordType
 	{
 		public const string Soa = "SOA";
 		public const string A = "A";
