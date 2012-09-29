@@ -25,7 +25,22 @@ namespace BespokeDynamicDnsUpdater.ConsoleApp
 			}
 			else
 			{
-				UpdateHostnames();
+				string ipAddress = null;
+				bool forceUpdate = false;
+
+				var ipAddressArg = args.SingleOrDefault(a => a.StartsWith("/ipaddress:"));
+
+				if(ipAddressArg != null)
+				{
+					ipAddress = ipAddressArg.Substring(11, ipAddressArg.Length - 11);
+				}
+
+				if(firstArg == "-force")
+				{
+					forceUpdate = true;
+				}
+
+				UpdateHostnames(ipAddress, forceUpdate);
 			}
 		}
 
@@ -173,14 +188,27 @@ namespace BespokeDynamicDnsUpdater.ConsoleApp
 			Console.WriteLine("Config settings updated.");
 		}
 
-		private static void UpdateHostnames()
+		private static void UpdateHostnames(string ipAddress, bool forceUpdate)
 		{
 			string hostnamesToUpdate = ConfigurationManager.AppSettings["HostNamesToUpdate"];
 
 			var updater = new BespokeUpdater(Config.DynamicDnsUpdaterClientTypeId);
-			updater.Client.InitializeLastUpdateIpAddresses(hostnamesToUpdate);
+			
+			//We can force the update if we don't initialize the last ip address that was used.
+			//this is useful because of DNS Caching
+			if(!forceUpdate)
+			{
+				updater.Client.InitializeLastUpdateIpAddresses(hostnamesToUpdate);				
+			}
 
-			updater.Client.UpdateHostnames(hostnamesToUpdate);
+			if(!string.IsNullOrWhiteSpace(ipAddress))
+			{
+				updater.Client.UpdateHostnames(hostnamesToUpdate, ipAddress);				
+			}
+			else
+			{
+				updater.Client.UpdateHostnames(hostnamesToUpdate);
+			}
 
 			//Console.ReadLine();
 		}
