@@ -10,6 +10,7 @@ namespace Bespoke.DynamicDnsUpdater.Tests.DnsimpleClient
 	public class DnsimpleClientTests
 	{
 		[Test]
+		[Ignore("Manual Test")]
 		public void CanUpdateHostname()
 		{
 			var client = new Client.Dnsimple.DnsimpleClient("", "");
