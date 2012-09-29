@@ -4,7 +4,7 @@ Bespoke Dynamic DNS Updater is an open source dynamic dns hostname updater clien
 
 DNS-O-Matic is a service that enables you to install a single updater client on your computer, and update hostnames at one or more of the [dozens](http://www.dnsomatic.com/wiki/supportedservices) of dynamic dns providers that DNS-O-Matic supports.
 
-**NEW!** Bespoke Dynamic DNS Updater now supports Amazon Route53 and Dnsimple.  The Windows setup has not yet been updated and a pre-compiled download is not yet available, but the service can be enabled by setting the appropriate values in the config file.
+**NEW!** Bespoke Dynamic DNS Updater now supports [Amazon Route53](http://aws.amazon.com/route53/) and [Dnsimple](https://dnsimple.com/).  The Windows setup has not yet been updated and a pre-compiled download is not yet available, but the service can be enabled by setting the appropriate values in the config file.
 
 A Windows Installer is available on GitHub ([Github Downloads](https://github.com/dmarchelya/BespokeDynamicDnsUpdater/downloads)).  This is the best place to download the installer without having to compile source code.
 
