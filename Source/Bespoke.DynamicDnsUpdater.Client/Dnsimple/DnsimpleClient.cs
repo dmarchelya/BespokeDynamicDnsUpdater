@@ -29,6 +29,12 @@ namespace Bespoke.DynamicDnsUpdater.Client.Dnsimple
 			{
 				if (HasIpAddresssChanged(hostname, ipAddress) == false) return true; // No change, no need to update
 
+				if (IsValidIpAddress(ipAddress) == false)
+				{
+					logger.Error(string.Format("Invalid IP Address provided: {0}", ipAddress));
+					return false;
+				}
+
 				var domainName = DomainName.Parse(hostname);
 
 				dynamic records = client.ListRecords(domainName.Domain);

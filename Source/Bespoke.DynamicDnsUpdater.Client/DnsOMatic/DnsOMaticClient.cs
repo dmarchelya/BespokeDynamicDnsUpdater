@@ -100,6 +100,12 @@ namespace Bespoke.DynamicDnsUpdater.Client.DnsOMatic
 			{
 				if (HasIpAddresssChanged(hostname, ipAddress) == false) return true; // No change, no need to update
 
+				if (IsValidIpAddress(ipAddress) == false)
+				{
+					logger.Error(string.Format("Invalid IP Address provided: {0}", ipAddress));
+					return false;
+				}
+
 				var updateUriFormat = "https://updates.dnsomatic.com/nic/update?hostname={0}&myip={1}&wildcard=NOCHG&mx=NOCHG&backmx=NOCHG";
 
 				var request = (HttpWebRequest)HttpWebRequest.Create(string.Format(updateUriFormat, hostname.Trim(), ipAddress));

@@ -49,6 +49,12 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 		{
 			if (HasIpAddresssChanged(hostname, ipAddress) == false) return true; // No change, no need to update
 
+			if(IsValidIpAddress(ipAddress) == false)
+			{
+				logger.Error(string.Format("Invalid IP Address provided: {0}", ipAddress));
+				return false;
+			}
+
 			var zonesResponse = client.ListHostedZones();
 			var zones = zonesResponse.ListHostedZonesResult.HostedZones;
 

@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Bespoke.DynamicDnsUpdater.Tests
 {
 	[TestFixture]
-	public class DomainNameFixture
+	public class DomainNameTests
 	{
 		[Test]
 		public void CanParseDomainNameWithHost()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using Bespoke.DynamicDnsUpdater.Common;
 using NLog;
 
@@ -192,6 +193,16 @@ namespace Bespoke.DynamicDnsUpdater.Client
 			}
 
 			return true;
+		}
+
+		public bool IsValidIpAddress(string ipAddress)
+		{
+			const string ipAddressPattern = @"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
+
+			var valid = Regex.IsMatch(ipAddress, ipAddressPattern);
+
+			return valid;
+
 		}
 		
 		#endregion Public Methods
