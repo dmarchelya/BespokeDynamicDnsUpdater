@@ -6,3 +6,7 @@ obj/
 bin/
 packages/
 !repositories.config
+*.wixobj
+*.wixpdfb
+*.msi
+*.log
