@@ -11,26 +11,32 @@
 	<xsl:strip-space elements="*" />
 
 	<xsl:template match="/">
-		<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+		<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 			<Fragment>
 				<ComponentGroup Id="BespokeDynamicDnsUpdaterWindowsServiceGroup">
-					<Component Id='BespokeDynamicDnsUpdaterWindowsService' Directory='INSTALLDIR' Guid='bc52be8f-af0c-4512-bf2b-527794daf3d8'
-					SharedDllRefCount='no' KeyPath='no' NeverOverwrite='no' Permanent='no' Transitive='no'
-					Win64='no' Location='either' Feature='DefaultFeature'>
+					<Component Id='BespokeDynamicDnsUpdaterWindowsService' Directory='INSTALLDIR' Guid='bc52be8f-af0c-4512-bf2b-527794daf3d8' Feature='DefaultFeature'>
 
-						<File Id='BespokeDynamicDnsUpdaterWindowsServiceExeFile' Name='Bespoke.DynamicDnsUpdater.WindowsService.exe' Source='C:\Repos\BespokeDynamicDnsUpdater\Source\Bespoke.DynamicDnsUpdater.WindowsService\bin\Debug\Bespoke.DynamicDnsUpdater.WindowsService.exe'
-						  ReadOnly='no' Compressed='yes' KeyPath='yes' Vital='yes' Hidden='no' System='no'
-						  Checksum='no' />
+						<File Id='BespokeDynamicDnsUpdaterWindowsServiceExeFile' Name='Bespoke.DynamicDnsUpdater.WindowsService.exe' Source='..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(var.Configuration)\Bespoke.DynamicDnsUpdater.WindowsService.exe' />
 
 						<ServiceInstall Id='BespokeDynamicDnsUpdaterWindowsServiceInstaller' DisplayName='Bespoke Dynamic DNS Updater Service' Name='BespokeDynamicDnsUpdaterService'
-						   Description="An Open Source DNS-O-Matic Client that runs on a specified interval and updates dynamic DNS hostnames if necessary." ErrorControl='normal' Start='auto' Type='ownProcess' Vital='yes' />
+						   Description="An Open Source Dynamic DNS Updater Client that runs on a specified interval and updates dynamic DNS hostnames if necessary." Start='auto' Type='ownProcess' ErrorControl='normal'>
+
+							<util:ServiceConfig
+								FirstFailureActionType="restart"
+								SecondFailureActionType="restart"
+								ThirdFailureActionType="restart"
+								RestartServiceDelayInSeconds="300"
+								ResetPeriodInDays="1"
+											/>
+							
+						</ServiceInstall>
 
 						<ServiceControl Id='BespokeDynamicDnsUpdaterWindowsServiceControl' Name='BespokeDynamicDnsUpdaterService'
 						  Stop='uninstall' Remove='uninstall' />
-
+						
 						<xsl:apply-templates />
 					</Component>
-				</ComponentGroup>	
+				</ComponentGroup>
 			</Fragment>
 		</Wix>
 	</xsl:template>
@@ -42,7 +48,7 @@
 				<xsl:value-of select="'no'" />
 			</xsl:attribute>
 			<xsl:attribute name="Source">
-				<xsl:value-of select="concat('C:\Repos\BespokeDynamicDnsUpdater\Source\Bespoke.DynamicDnsUpdater.WindowsService\bin\Debug\',substring(@Source,11))" />
+				<xsl:value-of select="concat('..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(var.Configuration)\',substring(@Source,11))" />
 			</xsl:attribute>
 		</xsl:copy>
 	</xsl:template>
@@ -54,7 +60,7 @@
 				<xsl:value-of select="'no'" />
 			</xsl:attribute>
 			<xsl:attribute name="Source">
-				<xsl:value-of select="concat('C:\Repos\BespokeDynamicDnsUpdater\Source\Bespoke.DynamicDnsUpdater.WindowsService\bin\Debug\',substring(@Source,11))" />
+				<xsl:value-of select="concat('..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(var.Configuration)\',substring(@Source,11))" />
 			</xsl:attribute>
 		</xsl:copy>
 	</xsl:template>
@@ -66,9 +72,9 @@
 				<xsl:value-of select="'no'" />
 			</xsl:attribute>
 			<xsl:attribute name="Source">
-				<xsl:value-of select="concat('C:\Repos\BespokeDynamicDnsUpdater\Source\Bespoke.DynamicDnsUpdater.WindowsService\bin\Debug\',substring(@Source,11))" />
+				<xsl:value-of select="concat('..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(var.Configuration)\',substring(@Source,11))" />
 			</xsl:attribute>
 		</xsl:copy>
 	</xsl:template>
-	
+
 </xsl:stylesheet>

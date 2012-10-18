@@ -68,9 +68,6 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Content>
     <Compile Include="Constants.cs" />
-    <Compile Include="BespokeDynamicDnsUpdaterWindowsServiceInstaller.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="BespokeDynamicDnsUpdaterWindowsService.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -80,10 +77,12 @@
     <ProjectReference Include="..\Bespoke.DynamicDnsUpdater.Client\Bespoke.DynamicDnsUpdater.Client.csproj">
       <Project>{F5E019BA-0EF7-4E70-A0AF-1F0CE0FA7100}</Project>
       <Name>Bespoke.DynamicDnsUpdater.Client</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\Bespoke.DynamicDnsUpdater.Common\Bespoke.DynamicDnsUpdater.Common.csproj">
       <Project>{504E0E85-AFDC-4DBE-9BDF-3672EB87885B}</Project>
       <Name>Bespoke.DynamicDnsUpdater.Common</Name>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -103,35 +102,6 @@
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
-    <CallTarget Targets="UpdateWindowsSetupProjectVersion" Condition="'$(Configuration)' == 'Release'" />
-  </Target>
-  <Target Name="UpdateWindowsSetupProjectVersion">
-    <ReadLinesFromFile File="$(SharedAssemblyInfoFile)">
-      <Output TaskParameter="Lines" ItemName="SharedAssemblyInfoFileContents" />
-    </ReadLinesFromFile>
-    <RegexMatch Input="@(SharedAssemblyInfoFileContents)" Expression="AssemblyFileVersion\(\&quot;(\d+)\.(\d+)\.(\d+)\.(\d+)\&quot;\)\]">
-      <Output ItemName="AssemblyVersionMatch" TaskParameter="Output" />
-    </RegexMatch>
-    <RegexReplace Input="@(AssemblyVersionMatch)" Expression="AssemblyFileVersion\(\&quot;(\d+)\.(\d+)\.(\d+)\.(\d+)\&quot;\)" Replacement="$1.$2.$3" Count="1">
-      <Output PropertyName="ProductVersionRaw" TaskParameter="Output" />
-    </RegexReplace>
-    <!--
-    There's a bug with the RegexMatch / RegexReplace where part of the line that is matched is being included when referencing
-    the capturing groups for the version, and it should be.  So we Replace those strings below.
-    -->
-    <CreateProperty Value="$(ProductVersionRaw.Replace('[assembly: ', '').Replace(']',''))">
-      <Output TaskParameter="Value" PropertyName="ProductVersion" />
-    </CreateProperty>
-    <ReadLinesFromFile File="$(WindowServiceSetupProjectFile)">
-      <Output TaskParameter="Lines" ItemName="WindowServiceSetupProjectFileContents" />
-    </ReadLinesFromFile>
-    <RegexMatch Input="@(WindowServiceSetupProjectFileContents)" Expression="\&quot;ProductVersion&quot; = \&quot;8:(\d+)\.(\d+)\.(\d+)\&quot;">
-      <Output ItemName="WindowsSetupProjectFileProductVersionMatch" TaskParameter="Output" />
-    </RegexMatch>
-    <RegexReplace Input="@(WindowsSetupProjectFileProductVersionMatch)" Expression="\&quot;ProductVersion&quot; = \&quot;8:(\d+)\.(\d+)\.(\d+)\&quot;" Replacement="$1.$2.$3" Count="1">
-      <Output PropertyName="OldWindowsSetupProjectProductVersion" TaskParameter="Output" />
-    </RegexReplace>
-    <FileUpdate Condition="'$(OldWindowsSetupProjectProductVersion)' != '$(ProductVersion)'" Files="$(WindowServiceSetupProjectFile)" Regex="\&quot;ProductVersion&quot; = \&quot;8:(\d+)\.(\d+)\.(\d+)\&quot;" ReplacementText="&quot;ProductVersion&quot; = &quot;8:$(ProductVersion)&quot;" />
   </Target>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>

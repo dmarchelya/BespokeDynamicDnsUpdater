@@ -16,8 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.DynamicDnsUpdater.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.DynamicDnsUpdater.Client", "Bespoke.DynamicDnsUpdater.Client\Bespoke.DynamicDnsUpdater.Client.csproj", "{F5E019BA-0EF7-4E70-A0AF-1F0CE0FA7100}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Bespoke.DynamicDnsUpdater.WindowsServiceSetup", "Bespoke.DynamicDnsUpdater.WindowsServiceSetup\Bespoke.DynamicDnsUpdater.WindowsServiceSetup.vdproj", "{766FC98A-4742-4AD5-8A7A-735EF54C43FB}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{93403B85-AE55-41E4-9B20-8220E6FDEA2D}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -35,6 +33,17 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Bespoke.DynamicDnsUpdater.W
 	EndProjectSection
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Bespoke.DynamicDnsUpdater.WindowsServiceInstaller", "Bespoke.DynamicDnsUpdater.WindowsServiceInstaller\Bespoke.DynamicDnsUpdater.WindowsServiceInstaller.wixproj", "{2039A930-85E0-4CEA-94FC-D0CBAE647C0A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8AE48C7A-593D-48FC-A6A8-0E248E7A1258} = {8AE48C7A-593D-48FC-A6A8-0E248E7A1258}
+		{504E0E85-AFDC-4DBE-9BDF-3672EB87885B} = {504E0E85-AFDC-4DBE-9BDF-3672EB87885B}
+		{F5E019BA-0EF7-4E70-A0AF-1F0CE0FA7100} = {F5E019BA-0EF7-4E70-A0AF-1F0CE0FA7100}
+		{E38606C4-1E83-47D1-99B4-065ABE4ECCFB} = {E38606C4-1E83-47D1-99B4-065ABE4ECCFB}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.DynamicDnsUpdater.WindowsServiceInstallerCustomActions", "Bespoke.DynamicDnsUpdater.WindowsServiceInstallerCustomActions\Bespoke.DynamicDnsUpdater.WindowsServiceInstallerCustomActions.csproj", "{E38606C4-1E83-47D1-99B4-065ABE4ECCFB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F5E019BA-0EF7-4E70-A0AF-1F0CE0FA7100} = {F5E019BA-0EF7-4E70-A0AF-1F0CE0FA7100}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,18 +95,6 @@ Global
 		{F5E019BA-0EF7-4E70-A0AF-1F0CE0FA7100}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F5E019BA-0EF7-4E70-A0AF-1F0CE0FA7100}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F5E019BA-0EF7-4E70-A0AF-1F0CE0FA7100}.Release|x86.ActiveCfg = Release|Any CPU
-		{766FC98A-4742-4AD5-8A7A-735EF54C43FB}.Debug|Any CPU.ActiveCfg = Debug
-		{766FC98A-4742-4AD5-8A7A-735EF54C43FB}.Debug|Any CPU.Build.0 = Debug
-		{766FC98A-4742-4AD5-8A7A-735EF54C43FB}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{766FC98A-4742-4AD5-8A7A-735EF54C43FB}.Debug|Mixed Platforms.Build.0 = Debug
-		{766FC98A-4742-4AD5-8A7A-735EF54C43FB}.Debug|x86.ActiveCfg = Debug
-		{766FC98A-4742-4AD5-8A7A-735EF54C43FB}.Debug|x86.Build.0 = Debug
-		{766FC98A-4742-4AD5-8A7A-735EF54C43FB}.Release|Any CPU.ActiveCfg = Release
-		{766FC98A-4742-4AD5-8A7A-735EF54C43FB}.Release|Any CPU.Build.0 = Release
-		{766FC98A-4742-4AD5-8A7A-735EF54C43FB}.Release|Mixed Platforms.ActiveCfg = Release
-		{766FC98A-4742-4AD5-8A7A-735EF54C43FB}.Release|Mixed Platforms.Build.0 = Release
-		{766FC98A-4742-4AD5-8A7A-735EF54C43FB}.Release|x86.ActiveCfg = Release
-		{766FC98A-4742-4AD5-8A7A-735EF54C43FB}.Release|x86.Build.0 = Release
 		{BEDFB0D1-3622-4E2E-97C6-D7ECF0B44262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BEDFB0D1-3622-4E2E-97C6-D7ECF0B44262}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEDFB0D1-3622-4E2E-97C6-D7ECF0B44262}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -138,6 +135,16 @@ Global
 		{2039A930-85E0-4CEA-94FC-D0CBAE647C0A}.Release|Mixed Platforms.Build.0 = Release|x86
 		{2039A930-85E0-4CEA-94FC-D0CBAE647C0A}.Release|x86.ActiveCfg = Release|x86
 		{2039A930-85E0-4CEA-94FC-D0CBAE647C0A}.Release|x86.Build.0 = Release|x86
+		{E38606C4-1E83-47D1-99B4-065ABE4ECCFB}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{E38606C4-1E83-47D1-99B4-065ABE4ECCFB}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{E38606C4-1E83-47D1-99B4-065ABE4ECCFB}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{E38606C4-1E83-47D1-99B4-065ABE4ECCFB}.Debug|x86.ActiveCfg = Debug|x86
+		{E38606C4-1E83-47D1-99B4-065ABE4ECCFB}.Debug|x86.Build.0 = Debug|x86
+		{E38606C4-1E83-47D1-99B4-065ABE4ECCFB}.Release|Any CPU.ActiveCfg = Release|x86
+		{E38606C4-1E83-47D1-99B4-065ABE4ECCFB}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{E38606C4-1E83-47D1-99B4-065ABE4ECCFB}.Release|Mixed Platforms.Build.0 = Release|x86
+		{E38606C4-1E83-47D1-99B4-065ABE4ECCFB}.Release|x86.ActiveCfg = Release|x86
+		{E38606C4-1E83-47D1-99B4-065ABE4ECCFB}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

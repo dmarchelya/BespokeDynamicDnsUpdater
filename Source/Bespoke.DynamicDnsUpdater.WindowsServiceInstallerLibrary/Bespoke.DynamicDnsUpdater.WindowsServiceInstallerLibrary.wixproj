@@ -21,10 +21,16 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Library.wxs" />
+    <Compile Include="LibraryGen.wxs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="OutputTransform.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
@@ -35,8 +41,8 @@
 	<Target Name="AfterBuild">
 	</Target>
 	-->
-	<Target Name="BeforeBuild">
-		<HeatDirectory DirectoryRefId="INSTALLLOCATION" OutputFile="Library.wxs" Directory="..\Bespoke.DynamicDnsUpdater.WindowsService\bin\Debug" ComponentGroupName="BespokeDynamicDnsUpdaterGroup" ToolPath="$(WixToolPath)" AutogenerateGuids="true" Transforms="OutputTransform.xslt">
-		</HeatDirectory>
-	</Target>
+  <Target Name="BeforeBuild">
+    <HeatDirectory DirectoryRefId="INSTALLLOCATION" OutputFile="LibraryGen.wxs" Directory="..\Bespoke.DynamicDnsUpdater.WindowsService\bin\Debug" ComponentGroupName="BespokeDynamicDnsUpdaterGroup" ToolPath="$(WixToolPath)" AutogenerateGuids="true" Transforms="OutputTransform.xslt">
+    </HeatDirectory>
+  </Target>
 </Project>

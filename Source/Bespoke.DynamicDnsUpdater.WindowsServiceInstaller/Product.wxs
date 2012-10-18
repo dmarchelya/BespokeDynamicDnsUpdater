@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Product Id="58D49CD9-863C-48EE-98C6-7881C83E9731" Name="Bespoke Dynamic DNS Updater" Language="1033" Version="1.0.2.0" Manufacturer="Bespoke Industries" UpgradeCode="C970C20A-C31F-482B-8FE3-8EDE7E85F298">
-        <Package InstallerVersion="200" Compressed="yes" />
+        <Package InstallerVersion="200" Compressed="yes" Manufacturer="Bespoke Industries" />
         <Media Id="1" Cabinet="bespoke.cab" EmbedCab="yes" />
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLDIR" Name="Bespoke Dynamic DNS Updater">
-				</Directory>
+                <Directory Id="INSTALLDIR" Name="Bespoke Dynamic DNS Updater">
+                </Directory>
             </Directory>
         </Directory>
         <Feature Id="DefaultFeature" Title="Main Feature" Level="1">
-			<ComponentGroupRef Id="BespokeDynamicDnsUpdaterWindowsServiceGroup"/>
+            <ComponentGroupRef Id="BespokeDynamicDnsUpdaterWindowsServiceGroup" />
         </Feature>
-        <UI>
-            <InstallUISequence>
-            </InstallUISequence>
-            <UIText Id="License" />
-        </UI>
         <WixVariable Id="WixUILicenseRtf" Value="..\..\Documents\License.rtf" />
-        <Property Id="ApplicationFolderName" Value="Bespoke Dynamic DNS Updater" />
+
+		<Icon Id="BespokeDynamicDnsUpdater.ico" SourceFile="BespokeDynamicDnsUpdater.ico"/>
+		<Property Id="ARPPRODUCTICON" Value="BespokeDynamicDnsUpdater.ico" />
+		
+		<Property Id="ApplicationFolderName" Value="Bespoke Dynamic DNS Updater" />
         <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
-        <UIRef Id="WixUI_InstallDir" />
+
+		<UIRef Id="WixUI_InstallDirBespoke" />
+        <Binary Id="WindowsServiceInstallerCustomActions" SourceFile="..\Bespoke.DynamicDnsUpdater.WindowsServiceInstallerCustomActions\bin\Debug\Bespoke.DynamicDnsUpdater.WindowsServiceInstallerCustomActions.CA.dll" />
+		<CustomAction Id="SetUpdateAppConfigData" Return="check" Property="UpdateAppConfig" Value="INSTALLDIR=[INSTALLDIR];HOSTNAMES=[HOSTNAMES];DNSCLIENTUSERNAME=[DNSCLIENTUSERNAME];DNSCLIENTPASSWORD=[DNSCLIENTPASSWORD]" />
+		<CustomAction Id="UpdateAppConfig" BinaryKey="WindowsServiceInstallerCustomActions" DllEntry="UpdateAppConfig"  Execute="deferred" Return="check" />
+		<CustomAction Id="StartService" BinaryKey="WindowsServiceInstallerCustomActions" DllEntry="StartService" Execute="deferred" Return="check" />
+		<InstallExecuteSequence>
+			<Custom Action="SetUpdateAppConfigData" Before="UpdateAppConfig">NOT Installed</Custom>
+			<Custom Action="UpdateAppConfig" Before="InstallFinalize">NOT Installed</Custom>
+			<Custom Action="StartService" After="UpdateAppConfig">NOT Installed</Custom>
+		</InstallExecuteSequence>
     </Product>
 </Wix>
