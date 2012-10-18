@@ -50,9 +50,9 @@
     <Compile Include="EnumerationUtility.cs" />
     <Compile Include="StringUtility.cs" />
     <Compile Include="StringValueAttribute.cs" />
-    <Content Include="..\SolutionItems\SharedAssemblyInfo.cs">
+    <Compile Include="..\SolutionItems\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Content>
+    </Compile>
     <Compile Include="Config.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

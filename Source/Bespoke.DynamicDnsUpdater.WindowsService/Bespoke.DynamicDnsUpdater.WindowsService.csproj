@@ -64,9 +64,9 @@
       <Link>License.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\SolutionItems\SharedAssemblyInfo.cs">
+    <Compile Include="..\SolutionItems\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Content>
+    </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="BespokeDynamicDnsUpdaterWindowsService.cs">
       <SubType>Component</SubType>
