@@ -69,4 +69,13 @@
 	<Target Name="AfterBuild">
 	</Target>
 	-->
+
+	<Target Name="BeforeBuild">
+		<GetAssemblyIdentity AssemblyFiles="$(SolutionDir)Bespoke.DynamicDnsUpdater.WindowsService\bin\$(Configuration)\Bespoke.DynamicDnsUpdater.Client.dll">
+			<Output TaskParameter="Assemblies" ItemName="AssemblyVersions" />
+		</GetAssemblyIdentity>
+		<CreateProperty Value="ProductVersion=%(AssemblyVersions.Version);$(DefineConstants)">
+			<Output TaskParameter="Value" PropertyName="DefineConstants"/>
+		</CreateProperty>
+	</Target>
 </Project>
