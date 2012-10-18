@@ -22,7 +22,7 @@
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
 
 		<UIRef Id="WixUI_InstallDirBespoke" />
-        <Binary Id="WindowsServiceInstallerCustomActions" SourceFile="..\Bespoke.DynamicDnsUpdater.WindowsServiceInstallerCustomActions\bin\Debug\Bespoke.DynamicDnsUpdater.WindowsServiceInstallerCustomActions.CA.dll" />
+        <Binary Id="WindowsServiceInstallerCustomActions" SourceFile="..\Bespoke.DynamicDnsUpdater.WindowsServiceInstallerCustomActions\bin\$(var.Configuration)\Bespoke.DynamicDnsUpdater.WindowsServiceInstallerCustomActions.CA.dll" />
 		<CustomAction Id="SetUpdateAppConfigData" Return="check" Property="UpdateAppConfig" Value="INSTALLDIR=[INSTALLDIR];HOSTNAMES=[HOSTNAMES];DNSCLIENTUSERNAME=[DNSCLIENTUSERNAME];DNSCLIENTPASSWORD=[DNSCLIENTPASSWORD]" />
 		<CustomAction Id="UpdateAppConfig" BinaryKey="WindowsServiceInstallerCustomActions" DllEntry="UpdateAppConfig"  Execute="deferred" Return="check" />
 		<CustomAction Id="StartService" BinaryKey="WindowsServiceInstallerCustomActions" DllEntry="StartService" Execute="deferred" Return="check" />
