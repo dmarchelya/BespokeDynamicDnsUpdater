@@ -8,8 +8,8 @@
     <ProjectGuid>{2722893D-DC2E-4467-940E-3C772BCC49F2}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BespokeDynamicDnsUpdater.ConsoleApp</RootNamespace>
-    <AssemblyName>BespokeDynamicDnsUpdater.ConsoleApp</AssemblyName>
+    <RootNamespace>Bespoke.DynamicDnsUpdater.ConsoleApp</RootNamespace>
+    <AssemblyName>Bespoke.DynamicDnsUpdater.ConsoleApp</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
