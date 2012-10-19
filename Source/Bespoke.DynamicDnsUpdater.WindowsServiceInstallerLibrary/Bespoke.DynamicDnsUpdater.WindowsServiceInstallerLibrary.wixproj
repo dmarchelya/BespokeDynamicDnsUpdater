@@ -42,7 +42,7 @@
 	</Target>
 	-->
   <Target Name="BeforeBuild">
-    <HeatDirectory DirectoryRefId="INSTALLLOCATION" OutputFile="LibraryGen.wxs" Directory="..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(Configuration)" ComponentGroupName="BespokeDynamicDnsUpdaterGroup" ToolPath="$(WixToolPath)" AutogenerateGuids="true" Transforms="OutputTransform.xslt">
+    <HeatDirectory DirectoryRefId="INSTALLLOCATION" OutputFile="LibraryGen.wxs" Directory="..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(Configuration)" ComponentGroupName="BespokeDynamicDnsUpdaterGroup" ToolPath="$(WixToolPath)" AutogenerateGuids="true" Transforms="OutputTransform.xslt" RunAsSeparateProcess="true">
     </HeatDirectory>
   </Target>
 </Project>
