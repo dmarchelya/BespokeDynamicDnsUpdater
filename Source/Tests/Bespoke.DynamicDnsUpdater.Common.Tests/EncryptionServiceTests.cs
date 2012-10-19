@@ -41,7 +41,7 @@ namespace Bespoke.DynamicDnsUpdater.Common.Tests
 		}
 
 		[Test]
-		public void CanDecryptToString()
+		public void CanDecryptToStringUsingAsciiEncoding()
 		{
 			var service = new EncryptionService();
 			Encode.Encoding = Encoding.ASCII;
@@ -66,6 +66,18 @@ namespace Bespoke.DynamicDnsUpdater.Common.Tests
 			var decryptedString = decryptionService.DecryptBase64StringToString(encrytedString);
 
 			Assert.AreEqual("test", decryptedString);
+		}
+
+		[Test]
+		public void CanDecryptSecretKeyToString()
+		{
+			var service = new EncryptionService();
+
+			var encryptedBytes = service.EncryptToBytes("lc8Pe7M+XsbGyzTCmpkpREOHMd85H35WsF+CJhwS");
+
+			var decryptedString = service.DecryptToString(encryptedBytes);
+
+			Assert.AreEqual("lc8Pe7M+XsbGyzTCmpkpREOHMd85H35WsF+CJhwS", decryptedString);
 		}
 	}
 }

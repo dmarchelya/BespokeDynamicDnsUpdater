@@ -47,6 +47,10 @@
     <Content Include="CustomAction.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bespoke.DynamicDnsUpdater.Client\Bespoke.DynamicDnsUpdater.Client.csproj">
+      <Project>{F5E019BA-0EF7-4E70-A0AF-1F0CE0FA7100}</Project>
+      <Name>Bespoke.DynamicDnsUpdater.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bespoke.DynamicDnsUpdater.Common\Bespoke.DynamicDnsUpdater.Common.csproj">
       <Project>{504E0E85-AFDC-4DBE-9BDF-3672EB87885B}</Project>
       <Name>Bespoke.DynamicDnsUpdater.Common</Name>

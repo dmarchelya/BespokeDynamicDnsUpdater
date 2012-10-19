@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BespokeDynamicDnsUpdater.ico" />
+    <Compile Include="DnsClientTypeDlg.wxs" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
@@ -69,17 +70,15 @@
 	<Target Name="AfterBuild">
 	</Target>
 	-->
-	
-	<Target Name="BeforeBuild">
-		<GetAssemblyIdentity AssemblyFiles="$(SolutionDir)Bespoke.DynamicDnsUpdater.WindowsService\bin\$(Configuration)\Bespoke.DynamicDnsUpdater.WindowsService.exe" Condition="'$(Configuration)' == 'Release'">
-			<Output TaskParameter="Assemblies" ItemName="AssemblyVersions" />
-		</GetAssemblyIdentity>
-		<CreateProperty Value="ProductVersion=%(AssemblyVersions.Version);$(DefineConstants)" Condition="'$(Configuration)' == 'Release'">
-			<Output TaskParameter="Value" PropertyName="DefineConstants"/>
-		</CreateProperty>
-		<CreateProperty Value="ProductVersion=0.0.0.0;$(DefineConstants)" Condition="'$(Configuration)' != 'Release'">
-			<Output TaskParameter="Value" PropertyName="DefineConstants"/>
-		</CreateProperty>
-	</Target>
-	
+  <Target Name="BeforeBuild">
+    <GetAssemblyIdentity AssemblyFiles="$(SolutionDir)Bespoke.DynamicDnsUpdater.WindowsService\bin\$(Configuration)\Bespoke.DynamicDnsUpdater.WindowsService.exe" Condition="'$(Configuration)' == 'Release'">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyVersions" />
+    </GetAssemblyIdentity>
+    <CreateProperty Value="ProductVersion=%(AssemblyVersions.Version);$(DefineConstants)" Condition="'$(Configuration)' == 'Release'">
+      <Output TaskParameter="Value" PropertyName="DefineConstants" />
+    </CreateProperty>
+    <CreateProperty Value="ProductVersion=0.0.0.0;$(DefineConstants)" Condition="'$(Configuration)' != 'Release'">
+      <Output TaskParameter="Value" PropertyName="DefineConstants" />
+    </CreateProperty>
+  </Target>
 </Project>
