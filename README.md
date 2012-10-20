@@ -4,14 +4,14 @@ Bespoke Dynamic DNS Updater is an open source dynamic dns hostname updater clien
 
 DNS-O-Matic is a service that enables you to install a single updater client on your computer, and update hostnames at one or more of the [dozens](http://www.dnsomatic.com/wiki/supportedservices) of dynamic dns providers that DNS-O-Matic supports.
 
-**NEW!** Bespoke Dynamic DNS Updater now supports [Amazon Route53](http://aws.amazon.com/route53/) and [Dnsimple](https://dnsimple.com/).  The Windows setup has not yet been updated and a pre-compiled download is not yet available, but the service can be enabled by setting the appropriate values in the config file.
+**NEW!** Bespoke Dynamic DNS Updater now supports [Amazon Route53](http://aws.amazon.com/route53/) and [Dnsimple](https://dnsimple.com/).  The Windows installer has been rewritten and now includes the ability to configure these services during installation.
 
 A Windows Installer is available on GitHub ([Github Downloads](https://github.com/dmarchelya/BespokeDynamicDnsUpdater/downloads)).  This is the best place to download the installer without having to compile source code.
 
 More information is availabile on the [Github Wiki](https://github.com/dmarchelya/BespokeDynamicDnsUpdater/wiki/), including a list of [Frequently Asked Questions](https://github.com/dmarchelya/BespokeDynamicDnsUpdater/wiki/Frequently-Asked-Questions).
 
 ----------
-**License**
+**License** ([MIT License](http://opensource.org/licenses/mit-license.php))
 
 Copyright 2012 Bespoke Industries
 http://www.bespokeindustries.com/
@@ -27,10 +27,9 @@ the following conditions:
 The above copyright notice and this permission notice shall be
 included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
