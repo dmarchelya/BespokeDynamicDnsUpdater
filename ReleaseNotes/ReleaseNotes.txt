@@ -1,5 +1,5 @@
-DNS-O-Matic Client .NET Release Notes
--------------------------------------
+Bespoke Dynamic DNS Updater Release Notes
+-----------------------------------------
 
 v1.0.3
 ------
