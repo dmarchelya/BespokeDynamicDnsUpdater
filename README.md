@@ -1,10 +1,10 @@
 # Bespoke Dynamic DNS Updater #
 
-Bespoke Dynamic DNS Updater is an open source dynamic dns hostname updater client for [DNS-O-Matic](http://www.dnsomatic.com), [Amazon Route53](http://aws.amazon.com/route53/) and [Dnsimple](https://dnsimple.com/).   It runs on Windows and is written in C# and is built on the .NET Framework 4.
+Bespoke Dynamic DNS Updater is an open source dynamic dns hostname updater client for [DNS-O-Matic](http://www.dnsomatic.com), [Amazon Route53](http://aws.amazon.com/route53/) and [Dnsimple](https://dnsimple.com/r/06e6b21976c5b9).   It runs on Windows and is written in C# and is built on the .NET Framework 4.
 
 DNS-O-Matic is a service that enables you to install a single updater client on your computer, and update hostnames at one or more of the [dozens](http://www.dnsomatic.com/wiki/supportedservices) of dynamic dns providers that DNS-O-Matic supports.
 
-**NEW!** Bespoke Dynamic DNS Updater now supports [Amazon Route53](http://aws.amazon.com/route53/) and [Dnsimple](https://dnsimple.com/).  The Windows installer has been rewritten and now includes the ability to configure these services during installation.
+**NEW!** Bespoke Dynamic DNS Updater now supports [Amazon Route53](http://aws.amazon.com/route53/) and [Dnsimple](https://dnsimple.com/r/06e6b21976c5b9).  The Windows installer has been rewritten and now includes the ability to configure these services during installation.
 
 A Windows Installer is available on GitHub ([Github Downloads](https://github.com/dmarchelya/BespokeDynamicDnsUpdater/downloads)).  This is the best place to download the installer without having to compile source code.
 
