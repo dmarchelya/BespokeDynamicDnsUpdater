@@ -1,8 +1,27 @@
 DNS-O-Matic Client .NET Release Notes
 -------------------------------------
 
+v1.0.3
+------
+
+- Converted Windows Installer over to WiX.
+- Added support for Amazon Route53 and Dnsimple to the installer.
+
+v1.0.2
+------
+- Renamed the product to Bespoke Dynamic DNS Updater.
+- Added Amazon Route53 support.
+- Added Dnsimple Support.
+- Added a check to see what the current IP address is the hostname before pushing an update so that updates are only pushed when necessary.
+- Switched logging to NLog.
+- Switched NUnit references over to NuGet.
+- Added the ability to encrypt dns service passwords.
+- Added the ability to pass parameters to the console application that set config file values.
+- Added check that the supplied IP Address is valid before sending it to the dynamic dns service.
+
 v1.0.1
 ------
+
 - Setting recovery options when using the the Windows Setup Project that attempt to restart the service on failure.
 - Added an icon for the Add/Remove Programs interface.
 
