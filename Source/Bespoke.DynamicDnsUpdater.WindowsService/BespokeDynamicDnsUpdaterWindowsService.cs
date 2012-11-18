@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Reflection;
 using System.ServiceProcess;
 using System.Threading;
@@ -14,8 +15,8 @@ namespace Bespoke.DynamicDnsUpdater.WindowsService
 		private Logger logger = LogManager.GetCurrentClassLogger();
 
 		private BespokeUpdater updater;
-		private TimeSpan updateStartDelay = TimeSpan.FromSeconds(15);
-		private TimeSpan updateInterval = TimeSpan.FromMinutes(5);
+		private TimeSpan updateStartDelay;
+		private TimeSpan updateInterval;
 		private Timer timer = null;
 		private string username = string.Empty;
 		private string password = string.Empty;
@@ -24,6 +25,9 @@ namespace Bespoke.DynamicDnsUpdater.WindowsService
 		public BespokeDynamicDnsUpdaterWindowsService()
 		{
 			ServiceName = Constants.ServiceName;
+
+			updateStartDelay = TimeSpan.FromSeconds(15);
+			updateInterval = TimeSpan.FromMinutes(UpdateIntervalInMinutes);
 		}
 
 		public static void Main()
@@ -85,6 +89,24 @@ namespace Bespoke.DynamicDnsUpdater.WindowsService
 		private void Update(object data)
 		{
 			updater.Client.UpdateHostnames(hostnamesToUpdate);
+		}
+
+		private int UpdateIntervalInMinutes
+		{
+			get
+			{
+				try
+				{
+					var interval = Convert.ToInt32(ConfigurationManager.AppSettings["UpdateIntervalInMinutes"]);
+					return interval;
+				}
+				catch (Exception ex)
+				{
+					logger.Error(ex);
+
+					return 5; //Default is 5 min.
+				}
+			}
 		}
 	}
 }
