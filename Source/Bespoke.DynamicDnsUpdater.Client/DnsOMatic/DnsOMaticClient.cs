@@ -106,50 +106,32 @@ namespace Bespoke.DynamicDnsUpdater.Client.DnsOMatic
 					return false;
 				}
 
-				var updateUriFormat = "https://updates.dnsomatic.com/nic/update?hostname={0}&myip={1}&wildcard=NOCHG&mx=NOCHG&backmx=NOCHG";
+				var request = CreateUpdateHostnameRequest(hostname, ipAddress);
 
-				var request = (HttpWebRequest)HttpWebRequest.Create(string.Format(updateUriFormat, hostname.Trim(), ipAddress));
-
-				request.Credentials = new NetworkCredential(Username, Password);
-
-				var assembly = Assembly.GetExecutingAssembly();
-				var product = (AssemblyProductAttribute)assembly.GetCustomAttributes(typeof(AssemblyProductAttribute), false)[0];
-				var version = assembly.GetName().Version;
-
-				request.UserAgent = string.Format("Bespoke Dynamic DNS Updater - {0} - {1}", product.Product, version);
-
-				var response = request.GetResponse();
-
-				string responseBody = string.Empty;
-				using (StreamReader stream = new StreamReader(response.GetResponseStream()))
+				using(var response = request.GetResponse())
 				{
-					responseBody = stream.ReadToEnd();
-
-					logger.Info(string.Format("DNS-O-Matic update response for hostname {0}: {1}", hostname, responseBody));
-
-					var regex = new Regex(@"\w+");
-					var match = regex.Match(responseBody);
-
-					UpdateStatusCode statusCode;
-
-					if (match.Success)
+					string responseBody = string.Empty;
+					using (var streamReader = new StreamReader(response.GetResponseStream()))
 					{
-						statusCode = UpdateStatusCodeConverter.GetUpdateStatusCode(match.Value);
-					}
-					else
-					{
-						statusCode = UpdateStatusCode.Unknown;
-					}
+						responseBody = streamReader.ReadToEnd();
 
-					UpdateStatusCodes[hostname] = statusCode;
+						logger.Info(string.Format("DNS-O-Matic update response for hostname {0}: {1}", hostname, responseBody));
 
-					if (statusCode == UpdateStatusCode.Good || statusCode == UpdateStatusCode.NoChange)
-					{
-						LastUpdateIpAddresses[hostname] = ipAddress;
-						return true;
-					}
+						var regex = new Regex(@"\w+");
+						var match = regex.Match(responseBody);
 
-					return false;
+						var statusCode = match.Success ? UpdateStatusCodeConverter.GetUpdateStatusCode(match.Value) : UpdateStatusCode.Unknown;
+
+						UpdateStatusCodes[hostname] = statusCode;
+
+						if (statusCode == UpdateStatusCode.Good || statusCode == UpdateStatusCode.NoChange)
+						{
+							LastUpdateIpAddresses[hostname] = ipAddress;
+							return true;
+						}
+
+						return false;
+					}	
 				}
 			}
 			catch (Exception ex)
@@ -160,6 +142,28 @@ namespace Bespoke.DynamicDnsUpdater.Client.DnsOMatic
 			}
 		}
 
+		/// <summary>
+		/// Create the HttpWebRequests to update the hostname by initializing the required properties.
+		/// </summary>
+		/// <param name="hostname">The hostname that will be updated.</param>
+		/// <param name="ipAddress">The IP Address to send for the update.</param>
+		/// <returns>The Request.</returns>
+		private HttpWebRequest CreateUpdateHostnameRequest(string hostname, string ipAddress)
+		{
+			var updateUriFormat ="https://updates.dnsomatic.com/nic/update?hostname={0}&myip={1}&wildcard=NOCHG&mx=NOCHG&backmx=NOCHG";
+
+			var request = (HttpWebRequest) HttpWebRequest.Create(string.Format(updateUriFormat, hostname.Trim(), ipAddress));
+
+			request.Credentials = new NetworkCredential(Username, Password);
+
+			var assembly = Assembly.GetExecutingAssembly();
+			var product = (AssemblyProductAttribute) assembly.GetCustomAttributes(typeof (AssemblyProductAttribute), false)[0];
+			var version = assembly.GetName().Version;
+
+			request.UserAgent = string.Format("Bespoke Dynamic DNS Updater - {0} - {1}", product.Product, version);
+			
+			return request;
+		}
 
 		/// <summary>
 		/// Updates the all of the hostnames registered with DNS-O-Matic with the public facing IP
