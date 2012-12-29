@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Bespoke.DynamicDnsUpdater.Common;
 using DNSimple;
 using NLog;
-using RestSharp;
 
 namespace Bespoke.DynamicDnsUpdater.Client.Dnsimple
 {
@@ -16,6 +15,11 @@ namespace Bespoke.DynamicDnsUpdater.Client.Dnsimple
 		public DnsimpleClient(string username, string password)
 		{
 			client = new DNSimpleRestClient(username, password);	
+		}
+
+		public DnsimpleClient(string username, ApiToken token)
+		{
+			client = new DNSimpleRestClient(username, token);
 		}
 
 		public DnsimpleClient()

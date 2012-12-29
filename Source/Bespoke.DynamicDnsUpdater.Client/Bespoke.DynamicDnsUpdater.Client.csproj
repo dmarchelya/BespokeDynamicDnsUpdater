@@ -37,20 +37,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AWSSDK.1.5.4.1\lib\AWSSDK.dll</HintPath>
     </Reference>
-    <Reference Include="DNSimple.Api">
-      <HintPath>..\packages\DNSimple.0.4.2\lib\4.0\DNSimple.Api.dll</HintPath>
+    <Reference Include="Bespoke.DNSimple.Api">
+      <HintPath>..\..\Library\Bespoke.DNSimple.Api.dll</HintPath>
     </Reference>
     <Reference Include="JsonFx">
-      <HintPath>..\packages\DNSimple.0.4.2\lib\4.0\JsonFx.dll</HintPath>
+      <HintPath>..\packages\JsonFx.2.0.1106.2610\lib\net40\JsonFx.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\DNSimple.0.4.2\lib\4.0\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>..\packages\DNSimple.0.4.2\lib\4.0\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=102.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.102.6\lib\net35\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

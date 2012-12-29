@@ -9,10 +9,10 @@
                 </ServiceInstall>
                 <ServiceControl Id="BespokeDynamicDnsUpdaterWindowsServiceControl" Name="BespokeDynamicDnsUpdaterService" Stop="uninstall" Remove="uninstall" />
                 <File Id="fil48148E16382ACCC6634615B8A1DAF558" KeyPath="no" Source="..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(var.Configuration)\AWSSDK.dll" />
+                <File Id="filCE32BAF51705659510816C43BE080CB7" KeyPath="no" Source="..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(var.Configuration)\Bespoke.DNSimple.Api.dll" />
                 <File Id="fil1449C4DEA46C95219C2010921C1A95B7" KeyPath="no" Source="..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(var.Configuration)\Bespoke.DynamicDnsUpdater.Client.dll" />
                 <File Id="filD6EF3168E9A8CBD5BAC8FC5638577217" KeyPath="no" Source="..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(var.Configuration)\Bespoke.DynamicDnsUpdater.Common.dll" />
                 <File Id="filBB760BED047C6FE2E9925769E19EDEC7" KeyPath="no" Source="..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(var.Configuration)\Bespoke.DynamicDnsUpdater.WindowsService.exe.config" />
-                <File Id="fil742AB74CB0D0C3F5BB98F2D1CB0D5543" KeyPath="no" Source="..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(var.Configuration)\DNSimple.Api.dll" />
                 <File Id="filE79C96A9CB7B4EE31D306EAD8A8E74B9" KeyPath="no" Source="..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(var.Configuration)\JsonFx.dll" />
                 <File Id="fil820B83F773926D897EB844E033EF7AF6" KeyPath="no" Source="..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(var.Configuration)\JsonFx.xml" />
                 <File Id="fil1E15B579C406041E9F5C28C3495E4B86" KeyPath="no" Source="..\Bespoke.DynamicDnsUpdater.WindowsService\bin\$(var.Configuration)\Newtonsoft.Json.dll" />

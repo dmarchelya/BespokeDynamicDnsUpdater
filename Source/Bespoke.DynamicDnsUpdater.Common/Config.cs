@@ -116,5 +116,10 @@ namespace Bespoke.DynamicDnsUpdater.Common
 				}
 			}
 		}
+
+		public static string DnsimpleApiToken
+		{
+			get { return ConfigurationManager.AppSettings["DnsimpleApiToken"]; }
+		}
 	}
 }

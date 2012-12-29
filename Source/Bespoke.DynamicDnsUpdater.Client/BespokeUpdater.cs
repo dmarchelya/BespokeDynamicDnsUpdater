@@ -6,6 +6,8 @@ using System.Text;
 using Bespoke.DynamicDnsUpdater.Client.DnsOMatic;
 using Bespoke.DynamicDnsUpdater.Client.Dnsimple;
 using Bespoke.DynamicDnsUpdater.Client.Route53;
+using Bespoke.DynamicDnsUpdater.Common;
+using DNSimple;
 
 namespace Bespoke.DynamicDnsUpdater.Client
 {
@@ -41,7 +43,10 @@ namespace Bespoke.DynamicDnsUpdater.Client
 				case DynamicDnsUpdaterClientType.Route53:
 					return new Route53Client();
 				case DynamicDnsUpdaterClientType.Dnsimple:
-					return new DnsimpleClient();
+					if(!string.IsNullOrWhiteSpace(Config.DnsimpleApiToken))
+						return new DnsimpleClient(Config.DnsimpleUsername, new ApiToken(Config.DnsimpleApiToken));
+					else
+						return new DnsimpleClient();
 				default: 
 					return new DnsOMaticClient();
 			}
