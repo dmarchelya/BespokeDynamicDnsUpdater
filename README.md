@@ -6,7 +6,7 @@ DNS-O-Matic is a service that enables you to install a single updater client on 
 
 **NEW!** Bespoke Dynamic DNS Updater now supports [Amazon Route53](http://aws.amazon.com/route53/) and [Dnsimple](https://dnsimple.com/r/06e6b21976c5b9).  The Windows installer has been rewritten and now includes the ability to configure these services during installation.
 
-A Windows Installer is available on GitHub ([Github Downloads](https://github.com/dmarchelya/BespokeDynamicDnsUpdater/downloads)).  This is the best place to download the installer without having to compile source code.
+A Windows Installer is available on Amazon S3 ([S3 Downloads](http://bespoke-dynamic-dns-updater.s3.amazonaws.com/list.html)).  This is the best place to download the installer without having to compile source code.
 
 More information is availabile on the [Github Wiki](https://github.com/dmarchelya/BespokeDynamicDnsUpdater/wiki/), including a list of [Frequently Asked Questions](https://github.com/dmarchelya/BespokeDynamicDnsUpdater/wiki/Frequently-Asked-Questions).
 
