@@ -55,17 +55,20 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 				return false;
 			}
 
-			var zonesResponse = client.ListHostedZones();
-			var zones = zonesResponse.ListHostedZonesResult.HostedZones;
+			var zones = GetHostedZones();
+
+			if (zones == null)
+				return false;
 
 			try
 			{
-				if(!LastUpdateIpAddresses.ContainsKey(hostname))
+				if (!LastUpdateIpAddresses.ContainsKey(hostname))
 				{
 					InitializeLastUpdateIpAddresses(hostname);
 				}
 
 				var lastIpAddress = LastUpdateIpAddresses[hostname];
+
 				var deleteRequest = GetChangeResourceRecordSetsRequest(hostname, lastIpAddress, EnumerationUtility.GetStringValue(ChangeActionType.Delete), zones);
 				var deleteResponse = client.ChangeResourceRecordSets(deleteRequest);
 			}
@@ -124,6 +127,22 @@ namespace Bespoke.DynamicDnsUpdater.Client.Route53
 			              		HostedZoneId = hostedZoneId
 			              	};
 			return request;
+		}
+
+		private List<HostedZone> GetHostedZones()
+		{
+			try
+			{
+				var zonesResponse = client.ListHostedZones();
+				var zones = zonesResponse.ListHostedZonesResult.HostedZones;
+
+				return zones;
+			}
+			catch (Exception ex)
+			{
+				logger.Error(ex);
+				return null;
+			}
 		}
 	}
 }
